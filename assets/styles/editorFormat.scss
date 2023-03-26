@@ -1,0 +1,44 @@
+@import '../plugins/prismjs/prism';
+@import '../plugins/prismjs/prism-line-numbers.min';
+
+.ProseMirror > * {
+  font-size: $text-size;
+}
+
+blockquote {
+  border-left: 4px solid var(--v-blockquote-base);
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding-left: 16px;
+}
+
+.editor-set-text-color {
+  & * {
+    color: inherit;
+  }
+}
+
+.editor-callout-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--v-borderLine-base);
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+
+  & > .callout-icon {
+    // TODO: size
+    // TODO: COLOR
+    font-size: 1em;
+    margin-right: 20px;
+  }
+}
+
+.editor-inline-code {
+  // TODO:
+}
+
+.line-numbers > code{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
