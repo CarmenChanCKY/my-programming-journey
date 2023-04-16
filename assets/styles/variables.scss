@@ -3,26 +3,36 @@
 // The variables you want to modify
 // $font-size-root: 20px;
 
-@import '~vuetify/src/styles/styles.sass';
+@import "~vuetify/src/styles/styles.sass";
 
-$content-width: 900px;
-$text-size: 18px;
-$post-title-size: 28px;
+:root {
+  --content-width: 800px;
+  --text-size: 18px;
+  --post-title-size: 26px;
+}
 
-$admin-content-width: 1200px;
+$breakpoint-md: 799.9px;
+$breakpoint-sm: 599.9px;
+$breakpoint-xs: 449.9px;
 
 $material-light: map-deep-merge(
   $material-light,
   (
-    'background': var(--v-background-base),
-    'color': var(--v-text-base),
+    "background": var(--v-background-base),
+    "color": var(--v-text-base),
   )
 );
 
 $material-dark: map-deep-merge(
   $material-dark,
   (
-    'background': var(--v-background-base),
-    'text-color': var(--v-text-base),
+    "background": var(--v-background-base),
+    "text-color": var(--v-text-base),
   )
 );
+
+@media screen and (max-width: $breakpoint-sm) {
+  :root {
+    --post-title-size: 1.333rem;
+  }
+}

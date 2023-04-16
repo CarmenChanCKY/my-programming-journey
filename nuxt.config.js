@@ -1,5 +1,3 @@
-import colors from "vuetify/es5/util/colors";
-
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -18,13 +16,21 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~/assets/styles/global.scss"],
+  css: [
+    "~/assets/styles/global.scss",
+    "~/plugins/prismjs/prism.css",
+    "~/plugins/prismjs/prism-line-numbers.min.css",
+    "~/assets/styles/post.scss",
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/axios.js",
     "~/plugins/filter/filter.ts",
     "~/plugins/prototype/common.ts",
     "~/plugins/prototype/validator.ts",
+    { src: "~/plugins/prismjs/prism.js", mode: "client" },
+    { src: "~/plugins/prismjs/prism-line-numbers.js", mode: "client" },
     { src: "~/plugins/vuex-persist.js", mode: "client" },
   ],
 
@@ -40,7 +46,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ["@nuxtjs/axios"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -63,6 +69,7 @@ export default {
           background: "#ffffff",
           themeBtn: "#FF6C00",
           borderLine: "#cacaca",
+          dividerBorderLine: "#e3e3e3",
           blockquote: "#0087ff",
           vCard: "#fdfdfd",
           editorButton: "#8be2ff",
@@ -81,15 +88,22 @@ export default {
           background: "#2E2C2F",
           themeBtn: "#FFC107",
           borderLine: "#797979",
+          dividerBorderLine: "#e3e3e3",
           blockquote: "#0087ff",
           vCard: "#373737",
           editorButton: "#0d829d",
         },
       },
-      dark: false,
     },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      document.body.scrollTo(0, 0);
+      return { x: 0, y: 0 };
+    },
+  },
 };

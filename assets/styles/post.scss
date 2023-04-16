@@ -1,7 +1,4 @@
-@import '../plugins/prismjs/prism';
-@import '../plugins/prismjs/prism-line-numbers.min';
-
-.ProseMirror > * {
+/* .ProseMirror > * {
   font-size: $text-size;
 }
 
@@ -34,11 +31,21 @@ blockquote {
   }
 }
 
-.editor-inline-code {
-  // TODO:
-}
+ */
 
-.line-numbers > code{
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+.post-content {
+  line-height: 2.5;
+
+  pre > code {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    font-size: var(--text-size) !important;
+  }
+
+  .post-img {
+    width: 100%;
+  }
+
+  .inline-code {
+  }
 }

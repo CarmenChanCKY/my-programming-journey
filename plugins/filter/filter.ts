@@ -1,9 +1,11 @@
 import _Vue from "vue";
 
-_Vue.filter("formatDate", (value: string) => {
-  if (value === "") {
-    return {};
-  }
+export default () => {
+  _Vue.filter("formatDate", (value: string) => {
+    if (value === "") {
+      return {};
+    }
 
-  return value.substring(0, 10);
-});
+    return value.substring(0, 10);
+  });
+};

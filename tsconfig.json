@@ -25,9 +25,19 @@
     },
     "types": [
       "@nuxt/types",
-      "@types/node"
+      "@types/node",
+      "@nuxtjs/vuetify",
+      "@nuxtjs/axios"
     ]
   },
+  "include": [
+    "plugins/**/*.ts",
+    "pages/**/*.vue",
+    "layouts/**/*.vue",
+    "store/**/*.ts",
+    "*.svg",
+    "components"
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",
