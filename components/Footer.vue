@@ -1,4 +1,4 @@
-<template #footer>
+<template>
   <footer>
     <section class="footer-container">
       <div>

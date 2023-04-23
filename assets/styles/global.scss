@@ -23,6 +23,17 @@ p {
   margin-bottom: 0 !important;
 }
 
+.blog-main-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blog-main-content {
+  flex-grow: 1;
+}
+
 %main-title-font {
   font-family: "Quantico", sans-serif;
 }
@@ -101,7 +112,7 @@ p {
 }
 
 @media screen and (max-width: $breakpoint-sm) {
-  %post-title {
+  /* %post-title {
     text-align: left;
-  }
+  } */
 }

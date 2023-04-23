@@ -1,8 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - my-programming-journey",
-    title: "my-programming-journey",
+    titleTemplate: "%s - My Programming Journey",
+    title: "My Programming Journey",
     htmlAttrs: {
       lang: "en",
     },
@@ -12,7 +12,13 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/my_programming_journey_favicon.png",
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -101,6 +107,7 @@ export default {
   build: {},
 
   router: {
+    middleware: ["meta"],
     scrollBehavior(to, from, savedPosition) {
       document.body.scrollTo(0, 0);
       return { x: 0, y: 0 };

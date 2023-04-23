@@ -115,8 +115,8 @@ export default class PostCard extends Vue {
 }
 
 @media screen and (max-width: $breakpoint-sm) {
-  .post-preview {
+  /* .post-preview {
     text-align: left;
-  }
+  } */
 }
 </style>

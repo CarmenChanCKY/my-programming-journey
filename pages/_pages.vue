@@ -1,73 +1,25 @@
 <template>
-  <div>
-    <section class="post-card-container">
-      <PostCard
-        v-for="(data, index) of postData"
-        :key="index"
-        :post-data="data"
-      ></PostCard>
-    </section>
-    <section class="pagination-container" v-if="!isNaN(currentPage)">
-      <div>
-        <NuxtLink
-          class="prev-btn"
-          :to="`/${parseInt(currentPage.toString()) - 1}`"
-          :style="{ visibility: showPreviousBtn ? 'visible' : 'hidden' }"
-        >
-          <div class="pagination">
-            <v-icon>{{ leftIcon }}</v-icon>
-            Previous
-          </div>
-        </NuxtLink>
-        <div class="current-pages">{{ currentPage }} / {{ totalPage }}</div>
-        <NuxtLink
-          class="next-btn"
-          :to="`/${parseInt(currentPage.toString()) + 1}`"
-          :style="{ visibility: showNextBtn ? 'visible' : 'hidden' }"
-        >
-          <div class="pagination">
-            Next
-            <v-icon>{{ rightIcon }}</v-icon>
-          </div>
-        </NuxtLink>
-      </div>
-    </section>
-  </div>
+  <PostPage
+    :postData="postData"
+    :currentPage="currentPage"
+    :totalPost="totalPost"
+  ></PostPage>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import PostCard from "~/components/PostCard.vue";
-import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
-
+import PostPage from "~/components/PostPage.vue";
 @Component({
   components: {
-    PostCard,
+    PostPage,
   },
+  meta: { fullHeader: true },
 })
 export default class Index extends Vue {
   // data
-
-  leftIcon: string = mdiChevronLeft;
-  rightIcon: string = mdiChevronRight;
   postData = [];
-
   currentPage: number = 1;
-  limit: number = 10;
   totalPost: number = 0;
-
-  get totalPage(): number {
-    return Math.ceil(this.totalPost / this.limit);
-  }
-
-  // computed
-  get showPreviousBtn() {
-    return this.currentPage >= 2;
-  }
-
-  get showNextBtn() {
-    return this.postData.length === this.limit;
-  }
 
   async asyncData({ $axios, params, error }: any) {
     try {
@@ -106,40 +58,3 @@ export default class Index extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "~/assets/styles/global.scss";
-
-.post-card-container,
-.pagination-container {
-  @extend %center-div;
-}
-
-.pagination-container {
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  & > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-
-.pagination {
-  @extend %button;
-  font-size: 18px;
-
-  &:hover {
-    @extend %button-hover;
-
-    & .v-icon {
-      color: var(--v-primary-base);
-    }
-  }
-}
-
-.current-pages {
-  color: var(--v-secondary-base);
-}
-</style>

@@ -7,15 +7,36 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Watch } from "vue-property-decorator";
 
 @Component
 export default class ChangeTheme extends Vue {
   lightButton: string = `mdi-white-balance-sunny`;
   darkButton: string = "mdi-moon-waxing-crescent";
 
+  get theme(): boolean {
+    return this.$store.getters["persistent/isDarkTheme"];
+  }
+  @Watch("theme")
+  setVuetifyTheme() {
+    this.updateTheme();
+  }
+
+  // methods
   toggleTheme() {
     this.$store.dispatch("persistent/toggleTheme");
+  }
+
+  updateTheme() {
+    const currentTheme = this.theme;
+    this.$vuetify.theme.dark = currentTheme;
+  }
+
+  // lifecycle
+  created() {
+    setTimeout(() => {
+      this.updateTheme();
+    }, 200);
   }
 }
 </script>

@@ -47,7 +47,7 @@
 import { Vue, Component } from "vue-property-decorator";
 import { mdiTagOutline, mdiCalendar, mdiFolderOutline } from "@mdi/js";
 
-@Component({ watchQuery: ["page"] })
+@Component({ watchQuery: ["page"], meta: { fullHeader: false } })
 export default class Post extends Vue {
   // data
   tagIcon: string = mdiTagOutline;
