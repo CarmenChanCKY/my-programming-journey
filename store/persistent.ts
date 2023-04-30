@@ -22,7 +22,7 @@ export const getters: GetterTree<PersistentState, RootState> = {
 };
 
 export const mutations: MutationTree<PersistentState> = {
-  setTheme(state, darkTheme) {
+  setTheme(state, darkTheme: boolean) {
     state.isDarkTheme = darkTheme;
     Cookies.set("isDarkTheme", state.isDarkTheme ? "1" : "0", cookieConfig);
   },
@@ -30,19 +30,19 @@ export const mutations: MutationTree<PersistentState> = {
     state.isDarkTheme = !state.isDarkTheme;
     Cookies.set("isDarkTheme", state.isDarkTheme ? "1" : "0", cookieConfig);
   },
-  setFullHeader(state, fullHeader) {
+  setFullHeader(state, fullHeader: boolean) {
     state.isFullHeader = fullHeader;
   },
 };
 
 export const actions: ActionTree<PersistentState, RootState> = {
-  setTheme({ commit }, darkTheme) {
+  setTheme({ commit }, darkTheme: boolean) {
     commit("setTheme", darkTheme);
   },
   toggleTheme({ commit }) {
     commit("toggleTheme");
   },
-  setFullHeader({ commit }, fullHeader) {
+  setFullHeader({ commit }, fullHeader: boolean) {
     commit("setFullHeader", fullHeader);
   },
 };

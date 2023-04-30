@@ -36,7 +36,8 @@
     "layouts/**/*.vue",
     "store/**/*.ts",
     "*.svg",
-    "components"
+    "components",
+    "interfaces"
   ],
   "exclude": [
     "node_modules",

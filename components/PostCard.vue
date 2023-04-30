@@ -30,10 +30,12 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { mdiTagOutline, mdiCalendar, mdiFolderOutline } from "@mdi/js";
+import type PostPageInterface from "~/interfaces/PostPageInterface";
 
 @Component
 export default class PostCard extends Vue {
-  @Prop({ type: Object, required: true, default: () => {} }) postData!: any;
+  @Prop({ type: Object, required: true, default: () => {} })
+  postData!: PostPageInterface;
 
   tagIcon: string = mdiTagOutline;
   dataIcon: string = mdiCalendar;

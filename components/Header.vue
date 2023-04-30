@@ -43,15 +43,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { Vue, Component, Watch } from "vue-property-decorator";
 import ChangeTheme from "~/components/ChangeTheme.vue";
 import { mdiClose } from "@mdi/js";
 
 @Component({ components: { ChangeTheme } })
 export default class Header extends Vue {
+  mdiClose: string = mdiClose;
+
   headerClass: string = "full";
   toggleMenu: boolean = false;
-  mdiClose: string = mdiClose;
 
   get isFullHeader() {
     return this.$store.getters["persistent/isFullHeader"];
@@ -62,15 +63,13 @@ export default class Header extends Vue {
     this.changeResponsiveHeader(width);
   }
 
-  @Watch("isFullHeader")
+  @Watch("isFullHeader", { immediate: true })
   updateHeader() {
-    if (process.browser) {
-      if (!this.isFullHeader) {
-        this.headerClass = "simple";
-      } else {
-        this.headerClass = "full";
-        this.changeResponsiveHeader(window.innerWidth);
-      }
+    if (!this.isFullHeader) {
+      this.headerClass = "simple";
+    } else {
+      this.headerClass = "full";
+      this.changeResponsiveHeader(window.innerWidth);
     }
   }
 
@@ -89,7 +88,7 @@ export default class Header extends Vue {
 
 <style lang="scss" scoped>
 @import "~/assets/styles/global.scss";
-
+/* TODO: dark theme */
 header {
   &.full {
     display: flex;

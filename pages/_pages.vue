@@ -9,6 +9,8 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import PostPage from "~/components/PostPage.vue";
+import PostPageInterface from "~/interfaces/PostPageInterface";
+
 @Component({
   components: {
     PostPage,
@@ -17,22 +19,27 @@ import PostPage from "~/components/PostPage.vue";
 })
 export default class Index extends Vue {
   // data
-  postData = [];
-  currentPage: number = 1;
+  postData: Array<PostPageInterface> = [];
+  currentPage: number | string = 1;
   totalPost: number = 0;
 
-  async asyncData({ $axios, params, error }: any) {
+  async fetch() {
     try {
-      let pages = 1;
-      if (params.pages !== undefined) {
-        pages = params.pages;
+      let pages: any = 1;
+      if (this.$route.params.pages !== undefined) {
+        if (isNaN(parseInt(this.$route.params.pages))) {
+          this.$nuxt.error({ statusCode: 404, message: "Post not found" });
+          return;
+        }
+
+        pages = parseInt(this.$route.params.pages);
       }
 
-      const postData = await $axios.$get("/post/list", {
+      const postData = await this.$axios.$get("/post/list", {
         params: { pages },
       });
 
-      const formatData = [];
+      const formatData: any = [];
 
       for (let i = 0; i < postData.data.length; i++) {
         const data = {
@@ -40,6 +47,7 @@ export default class Index extends Vue {
           date: postData.data[i].date,
           slug: postData.data[i].slug,
           category: postData.data[i].category_name,
+          category_id: postData.data[i].category_id,
           tags: postData.data[i].tags_data,
           preview: postData.data[i].content,
         };
@@ -47,13 +55,11 @@ export default class Index extends Vue {
         formatData.push(data);
       }
 
-      return {
-        postData: formatData,
-        totalPost: postData.total,
-        currentPage: pages,
-      };
+      this.postData = formatData;
+      this.totalPost = postData.total;
+      this.currentPage = pages;
     } catch (e) {
-      //error({ statusCode: 404, message: 'Post not found' })
+      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }
   }
 }

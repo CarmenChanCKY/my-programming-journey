@@ -39,6 +39,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import PostCard from "~/components/PostCard.vue";
 import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
+import type PostPageInterface from "~/interfaces/PostPageInterface";
 
 @Component({
   components: {
@@ -47,9 +48,8 @@ import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
 })
 export default class PostPage extends Vue {
   @Prop({ type: Array, default: () => [], required: true })
-  postData!: Array<any>;
+  postData!: Array<PostPageInterface>;
   @Prop({ type: Number, default: 1, required: true }) currentPage!: number;
-
   @Prop({ type: Number, default: 0, required: true }) totalPost!: number;
 
   // data

@@ -38,6 +38,8 @@
             </li>
           </ul>
         </section>
+
+        <!-- TODO: previous post, next post -->
       </div>
     </section>
   </div>
@@ -46,6 +48,8 @@
   <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { mdiTagOutline, mdiCalendar, mdiFolderOutline } from "@mdi/js";
+import type PostDetailInterface from "~/interfaces/PostDetailInterface";
+import OtherPostInterface from "~/interfaces/OtherPostInterface";
 
 @Component({ watchQuery: ["page"], meta: { fullHeader: false } })
 export default class Post extends Vue {
@@ -54,6 +58,7 @@ export default class Post extends Vue {
   dateIcon: string = mdiCalendar;
   categoryIcon: string = mdiFolderOutline;
   postData: PostDetailInterface = {
+    id: -1,
     slug: "",
     title: "",
     date: "",
@@ -62,23 +67,25 @@ export default class Post extends Vue {
     tags: [],
     reference: [],
   };
+  previousPost: OtherPostInterface | null = null;
+  nextPost: OtherPostInterface | null = null;
   content: string = "";
 
-  async asyncData({ $axios, params, error }: any) {
+  async fetch() {
     try {
+      // get post data
       let slug = "";
-      if (params.slug !== undefined) {
-        slug = params.slug;
+      if (this.$route.params.slug !== undefined) {
+        slug = this.$route.params.slug;
       }
 
-      const postDetail = await $axios.$get("/post/detail", {
+      const postDetail = await this.$axios.$get("/post/detail", {
         params: { slug },
       });
 
-      console.log(postDetail);
-
-      const postData = {
-        slug: params.slug,
+      this.postData = {
+        id: postDetail.id,
+        slug: this.$route.params.slug,
         title: postDetail.title,
         date: postDetail.date,
         category: postDetail.category_name,
@@ -91,36 +98,33 @@ export default class Post extends Vue {
             : [],
       };
 
-      const content = postDetail.content;
+      this.content = postDetail.content;
 
-      return {
-        postData,
-        content,
-      };
+      // get previous post
+      const previousPost = await this.$axios.$get("/post/previous", {
+        params: { id: postDetail.id },
+      });
+
+      if (Object.keys(previousPost).length > 0) {
+        this.previousPost = previousPost;
+      } else {
+        this.previousPost = null;
+      }
+
+      // get next post
+      const nextPost = await this.$axios.$get("/post/next", {
+        params: { id: postDetail.id },
+      });
+
+      if (Object.keys(nextPost).length > 0) {
+        this.nextPost = nextPost;
+      } else {
+        this.nextPost = null;
+      }
     } catch (e) {
-      //error({ statusCode: 404, message: 'Post not found' })
+      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }
   }
-}
-
-interface PostDetailInterface {
-  slug: string;
-  title: string;
-  date: string;
-  category: string;
-  category_id: number;
-  tags: Array<TagsInterface>;
-  reference: Array<ReferenceInterface>;
-}
-
-interface TagsInterface {
-  name: string;
-  id: number;
-}
-
-interface ReferenceInterface {
-  name: string;
-  hyperlink: string;
 }
 </script>
 
@@ -129,13 +133,7 @@ interface ReferenceInterface {
 @import "~/assets/styles/global.scss";
 
 .post-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & > div {
-    width: var(--content-width);
-  }
+  @extend %center-div;
 }
 
 .post-header-container {

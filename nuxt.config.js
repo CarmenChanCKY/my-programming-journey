@@ -31,6 +31,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/route.js",
     "~/plugins/axios.js",
     "~/plugins/filter/filter.ts",
     "~/plugins/prototype/common.ts",
@@ -113,4 +114,6 @@ export default {
       return { x: 0, y: 0 };
     },
   },
+
+  loading: false
 };
