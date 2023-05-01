@@ -11,6 +11,6 @@ export default ({ app, store }) => {
   app.router.afterEach((to, from) => {
     timeCounter = setTimeout(() => {
       store.dispatch("setLoading", false);
-    }, 300);
+    }, 500);
   });
 };

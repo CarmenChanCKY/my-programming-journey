@@ -1,7 +1,7 @@
 import VuexPersistence from "vuex-persist";
 import Cookies from "js-cookie";
 
-export default ({ store }) => {
+export default ({ app, store }) => {
   new VuexPersistence({
     key: "MyProgrammingJourneyVuex",
     storage: window.localStorage,
@@ -21,6 +21,8 @@ export default ({ store }) => {
   } else {
     browserDarkTheme = currentTheme === "1" ? true : false;
   }
+
+  app.vuetify.framework.theme.isDark = browserDarkTheme;
 
   store.dispatch("persistent/setTheme", browserDarkTheme);
 };

@@ -39,23 +39,56 @@
           </ul>
         </section>
 
-        <!-- TODO: previous post, next post -->
+        <div class="next-previous-container">
+          <NuxtLink
+            class="next-btn"
+            :style="{
+              visibility: $validator.isValid(nextPost) ? 'visible' : 'hidden',
+            }"
+            :to="`/post/${nextPost !== null ? nextPost.slug : ''}`"
+          >
+            <v-icon large class="ml-0 mr-2">{{ leftIcon }}</v-icon>
+            {{ nextPost !== null ? nextPost.title : "" }}
+          </NuxtLink>
+
+          <NuxtLink
+            class="previous-btn"
+            :style="{
+              visibility: $validator.isValid(previousPost)
+                ? 'visible'
+                : 'hidden',
+            }"
+            :to="`/post/${previousPost !== null ? previousPost.slug : ''}`"
+          >
+            {{ previousPost !== null ? previousPost.title : "" }}
+            <v-icon large class="mr-0 ml-2">{{ rightIcon }}</v-icon>
+          </NuxtLink>
+        </div>
       </div>
     </section>
   </div>
 </template>
-  
-  <script lang="ts">
+
+<script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { mdiTagOutline, mdiCalendar, mdiFolderOutline } from "@mdi/js";
+import {
+  mdiTagOutline,
+  mdiCalendar,
+  mdiFolderOutline,
+  mdiArrowLeft,
+  mdiArrowRight,
+} from "@mdi/js";
 import type PostDetailInterface from "~/interfaces/PostDetailInterface";
 import OtherPostInterface from "~/interfaces/OtherPostInterface";
+import Prism from "~/plugins/prism";
 
 @Component({ watchQuery: ["page"], meta: { fullHeader: false } })
 export default class Post extends Vue {
   // data
   tagIcon: string = mdiTagOutline;
   dateIcon: string = mdiCalendar;
+  leftIcon: string = mdiArrowLeft;
+  rightIcon: string = mdiArrowRight;
   categoryIcon: string = mdiFolderOutline;
   postData: PostDetailInterface = {
     id: -1,
@@ -121,6 +154,8 @@ export default class Post extends Vue {
       } else {
         this.nextPost = null;
       }
+
+      Prism.highlightAll();
     } catch (e) {
       //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }
@@ -128,8 +163,8 @@ export default class Post extends Vue {
 }
 </script>
 
-
 <style lang="scss" scoped>
+/* TODO: css */
 @import "~/assets/styles/global.scss";
 
 .post-container {
@@ -182,9 +217,42 @@ export default class Post extends Vue {
   }
 }
 
+.next-previous-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 30px;
+
+  & > a {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    @extend %button;
+
+    &:hover {
+      @extend %button-hover;
+
+      & .v-icon {
+        color: var(--v-primary-base);
+      }
+    }
+  }
+
+  & > .previous-btn {
+    text-align: right;
+  }
+}
+
 .v-icon {
   width: 20px;
   height: 20px;
   margin-right: 5px;
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .next-previous-container{
+    flex-direction: column;
+  }
 }
 </style>

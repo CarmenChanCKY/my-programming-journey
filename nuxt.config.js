@@ -24,9 +24,8 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "~/assets/styles/global.scss",
-    "~/plugins/prismjs/prism.css",
-    "~/plugins/prismjs/prism-line-numbers.min.css",
     "~/assets/styles/post.scss",
+    "~/assets/styles/prism.css"
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -36,9 +35,8 @@ export default {
     "~/plugins/filter/filter.ts",
     "~/plugins/prototype/common.ts",
     "~/plugins/prototype/validator.ts",
-    { src: "~/plugins/prismjs/prism.js", mode: "client" },
-    { src: "~/plugins/prismjs/prism-line-numbers.js", mode: "client" },
     { src: "~/plugins/vuex-persist.js", mode: "client" },
+    { src: "~/plugins/prism.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -57,6 +55,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
+    treeShake: true,
     customVariables: ["~/assets/styles/variables.scss"],
     theme: {
       options: {
@@ -105,7 +104,8 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+  },
 
   router: {
     middleware: ["meta"],
@@ -115,5 +115,5 @@ export default {
     },
   },
 
-  loading: false
+  loading: false,
 };

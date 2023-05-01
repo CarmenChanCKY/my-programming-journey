@@ -30,13 +30,13 @@ export default class ScrollToTop extends Vue {
   @Watch("$vuetify.breakpoint.width")
   updateWidth(width: number) {
     if (width < 600) {
-      if (this.scrollToTopListener !== null) {
+      if (this.$validator.isValid(this.scrollToTopListener)) {
         window.removeEventListener("scroll", this.handleScrollPos);
         this.scrollToTopListener = null;
       }
       this.showScrollButton = false;
     } else {
-      if (this.scrollToTopListener === null) {
+      if (!this.$validator.isValid(this.scrollToTopListener)) {
         this.scrollToTopListener = window.addEventListener(
           "scroll",
           this.handleScrollPos
@@ -59,7 +59,7 @@ export default class ScrollToTop extends Vue {
   }
 
   mounted() {
-    if (this.scrollToTopListener === null) {
+    if (!this.$validator.isValid(this.scrollToTopListener)) {
       this.scrollToTopListener = window.addEventListener(
         "scroll",
         this.handleScrollPos
@@ -68,7 +68,7 @@ export default class ScrollToTop extends Vue {
   }
 
   beforeDestroy() {
-    if (this.scrollToTopListener !== null) {
+    if (this.$validator.isValid(this.scrollToTopListener)) {
       window.removeEventListener("scroll", this.handleScrollPos);
       this.scrollToTopListener = null;
     }
