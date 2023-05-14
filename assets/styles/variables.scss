@@ -19,7 +19,6 @@ $material-light: map-deep-merge(
   $material-light,
   (
     "background": var(--v-background-base),
-    "color": var(--v-text-base),
   )
 );
 
@@ -27,9 +26,12 @@ $material-dark: map-deep-merge(
   $material-dark,
   (
     "background": var(--v-background-base),
-    "text-color": "#f50000",
   )
 );
+
+.v-application {
+  color: var(--v-colorText-base ) !important;
+}
 
 @media screen and (max-width: $breakpoint-sm) {
   :root {

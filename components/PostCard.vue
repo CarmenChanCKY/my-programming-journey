@@ -5,7 +5,7 @@
         {{ postData.title }}
       </div>
     </NuxtLink>
-    <div class="post-card-info">
+    <div class="post-info">
       <div class="post-date">
         <v-icon>{{ dataIcon }}</v-icon>
         <div>{{ postData.date }}</div>
@@ -17,7 +17,7 @@
     </div>
     <div class="post-tag-container">
       <v-icon>{{ tagIcon }}</v-icon>
-      <div v-for="tag of postData.tags" :key="tag.id" class="post-card-tag">
+      <div v-for="tag of postData.tags" :key="tag.id" class="post-tag">
         {{ tag.name }}
       </div>
     </div>
@@ -66,37 +66,6 @@ export default class PostCard extends Vue {
 
   &:hover {
     cursor: pointer;
-  }
-}
-
-.post-card-info {
-  @extend %post-info;
-}
-
-.post-date {
-  @extend %button;
-}
-
-.post-category {
-  @extend %button;
-
-  &:hover {
-    @extend %button-hover;
-  }
-}
-
-.post-tag-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  & > .post-card-tag {
-    @extend %post-card-tag;
-    margin-top: 5px;
-    margin-bottom: 5px;
-
-    &:hover {
-      @extend %post-card-tag-hover;
-    }
   }
 }
 

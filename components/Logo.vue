@@ -1,0 +1,45 @@
+<template>
+  <svg class="website-logo" version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1170 244">
+    <title>my programming journey logo</title>
+    <defs>
+      <image
+        width="1280"
+        height="720"
+        id="img1"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAAAALQAQMAAAD1s08VAAAAAXNSR0IB2cksfwAAAANQTFRFAAAAp3o92gAAAAF0Uk5TAEDm2GYAAACHSURBVHic7cExAQAAAMKg9U9tCU+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgaxN8AAQfAspoAAAAASUVORK5CYII="
+      />
+    </defs>
+    <use id="Background" href="#img1" x="-55" y="-174" />
+    <path
+      id="My Programming"
+      class="s0"
+      aria-label="My Programming"
+      d="m96.1 24.7v83.1h-13.6v-62.5l5.1-8.5h-7.7l-20.9 47.4h-9.8l-20.3-47.4h-7.6l5.1 8.5v62.5h-13.6v-83.1h24.3l16.8 39.8h1.7l16.8-39.8zm86.7 23.8v83.3q0 4.9-3.5 8.5-3.4 3.4-8.4 3.4h-49.3l10.2-10.2h39.1v-34l-8.5 8.5h-27.2q-4.9 0-8.5-3.4-3.4-3.6-3.4-8.5v-47.6h11.9v49.3h35.7v-49.3zm133.5-11.9v35.7q0 4.8-3.6 8.3-3.5 3.6-8.3 3.6h-45.9v23.8h-13.6v-59.5l11.9-11.9h-11.9v-11.9h59.5q4.8 0 8.3 3.6 3.6 3.5 3.6 8.3zm-47.6 35.7h34v-35.7h-44.2v45.9zm119.8-11.9v11.9h-11.9v-13.6h-23.8v49.3h-11.9v-59.5h11.9v8.5l8.5-8.5h15.3q5 0 8.4 3.6 3.5 3.4 3.5 8.3zm78.2 0v35.7q0 4.9-3.5 8.5-3.4 3.4-8.4 3.4h-35.7q-4.9 0-8.5-3.4-3.4-3.6-3.4-8.5v-35.7q0-4.9 3.4-8.3 3.6-3.6 8.5-3.6h35.7q5 0 8.4 3.6 3.5 3.4 3.5 8.3zm-47.6 37.4h35.7v-39.1h-35.7zm85-49.3h52.7l-10.2 10.2h-42.5v39.1h35.7v-34h11.9v68q0 4.9-3.5 8.5-3.4 3.4-8.4 3.4h-49.3l10.2-10.2h39.1v-34.2l-10.2 8.7h-25.5q-4.9 0-8.5-3.4-3.4-3.6-3.4-8.5v-35.7q0-4.9 3.4-8.3 3.6-3.6 8.5-3.6zm119.9 11.9v11.9h-11.9v-13.6h-23.8v49.3h-11.9v-59.5h11.9v8.5l8.5-8.5h15.3q4.9 0 8.3 3.6 3.6 3.4 3.6 8.3zm75.6 0v47.6h-11.9v-8.7l-10.2 8.7h-25.5q-4.9 0-8.5-3.4-3.4-3.6-3.4-8.5v-11.9q0-4.9 3.4-8.3 3.6-3.6 8.5-3.6h34l-10.2 10h-23.8v15.5h35.7v-39.1h-47.6l10.2-10.2h37.4q5 0 8.4 3.6 3.5 3.4 3.5 8.3zm124.1 0v47.6h-11.9v-49.3h-32.3v49.3h-11.9v-49.3h-32.3v49.3h-11.9v-59.5h11.9v8.5l8.5-8.5h23.8q10.4 0 11.8 8.7l8.6-8.7h23.8q5 0 8.4 3.6 3.5 3.4 3.5 8.3zm124.1 0v47.6h-11.9v-49.3h-32.3v49.3h-11.9v-49.3h-32.3v49.3h-11.9v-59.5h11.9v8.5l8.5-8.5h23.8q10.4 0 11.8 8.7l8.6-8.7h23.8q5 0 8.4 3.6 3.5 3.4 3.5 8.3zm35.7-35.7v13.6h-11.9v-13.6zm0 20.4v62.9h-11.9v-51zm83.3 15.3v47.6h-11.9v-49.3h-35.7v49.3h-11.9v-59.5h11.9v8.5l8.5-8.5h27.2q5 0 8.4 3.6 3.5 3.4 3.5 8.3zm37.4-11.9h52.7l-10.2 10.2h-42.5v39.1h35.7v-34h11.9v68q0 4.9-3.5 8.5-3.4 3.4-8.4 3.4h-49.3l10.2-10.2h39.1v-34.2l-10.2 8.7h-25.5q-4.9 0-8.5-3.4-3.4-3.6-3.4-8.5v-35.7q0-4.9 3.4-8.3 3.6-3.6 8.5-3.6z"
+    />
+    <path
+      id="Journey"
+      class="s0"
+      aria-label="Journey"
+      d="m670.3 127.4v58.8q0 3.1-2.8 6.3-3 3.5-7 3.5h-29.3q-4 0-6.9-2.9-3-3-3-6.9v-9.8h11.3v9.8h26.6v-49h-37.9v-9.8zm71.5 29.4v29.4q0 4.1-3 7-2.8 2.8-6.9 2.8h-29.4q-4 0-7-2.8-2.7-2.9-2.7-7v-29.4q0-4.1 2.7-6.9 3-2.9 7-2.9h29.4q4.1 0 6.9 2.9 3 2.8 3 6.9zm-39.3 30.8h29.4v-32.2h-29.4zm107.9-40.6v49h-9.9v-7l-7 7h-22.3q-4.1 0-7-2.8-2.8-2.9-2.8-7v-39.2h9.8v40.6h29.3v-40.6zm58.8 9.8v9.8h-9.8v-11.2h-19.6v40.6h-9.7v-49h9.7v7l7-7h12.6q4.1 0 6.9 2.9 2.9 2.8 2.9 6.9zm64.5 0v39.2h-9.9v-40.6h-29.4v40.6h-9.7v-49h9.7v7l7-7h22.4q4.1 0 6.9 2.9 3 2.8 3 6.9zm68.6 30.8v8.4h-39.2q-4.1 0-7-2.8-2.8-2.9-2.8-7v-29.4q0-4.1 2.8-6.9 2.9-2.9 7-2.9h29.4q4 0 6.8 2.9 3 2.8 3 6.9v9.8l-9.8 9.8h-28l8.3-8.4h19.7v-12.6h-29.4v32.2zm64.3-40.6v68.6q0 4.1-2.9 7-2.8 2.8-6.9 2.8h-40.5l8.3-8.4h32.2v-28l-7 7h-22.4q-4 0-7-2.8-2.7-2.9-2.7-7v-39.2h9.7v40.6h29.4v-40.6z"
+    />
+  </svg>
+</template>
+
+<script lang="ts">
+import { Vue, Component } from "nuxt-property-decorator";
+
+@Component
+export default class Logo extends Vue {}
+</script>
+
+<style lang="scss" scoped>
+.website-logo {
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+
+.s0 {
+  fill: var(--v-primary-base);
+}
+</style>

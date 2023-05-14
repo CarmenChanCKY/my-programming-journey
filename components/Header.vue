@@ -4,7 +4,7 @@
       <div v-if="headerClass === 'full'" class="website-title">
         My Programming Journey
       </div>
-      <img v-else class="website-logo" src="/my_programming_journey_logo.png" />
+      <Logo v-else></Logo>
     </NuxtLink>
 
     <div
@@ -45,9 +45,10 @@
 <script lang="ts">
 import { Vue, Component, Watch } from "vue-property-decorator";
 import ChangeTheme from "~/components/ChangeTheme.vue";
+import Logo from "~/components/Logo.vue";
 import { mdiClose } from "@mdi/js";
 
-@Component({ components: { ChangeTheme } })
+@Component({ components: { ChangeTheme, Logo } })
 export default class Header extends Vue {
   mdiClose: string = mdiClose;
 
@@ -88,7 +89,7 @@ export default class Header extends Vue {
 
 <style lang="scss" scoped>
 @import "~/assets/styles/global.scss";
-/* TODO: dark theme */
+
 header {
   &.full {
     display: flex;
@@ -101,7 +102,7 @@ header {
       font-size: 2.667rem;
       margin-bottom: 20px;
       font-weight: bold;
-      color: var(--v-text-base);
+      color: var(--v-colorText-base);
     }
 
     .nav-link {
@@ -140,44 +141,38 @@ header {
     .main-title-link {
       width: 70%;
       max-width: 300px;
-      & > .website-logo {
-        width: 100%;
-        object-fit: contain;
-        object-position: center;
-      }
     }
 
     .nav-link {
-      visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       z-index: 99;
       opacity: 0;
       position: fixed;
       height: 100%;
+      top: 0;
       right: 0;
-      width: 0;
       padding: 35px 20px 15px 20px;
-      -webkit-transition: width 0.3s ease-out, background-color 0.3s ease-out,
-        opacity 0.3s ease-out;
-      -moz-transition: width 0.3s ease-out, background-color 0.3s ease-out,
-        opacity 0.3s ease-out;
-      -ms-transition: width 0.3s ease-out, background-color 0.3s ease-out,
-        opacity 0.3s ease-out;
-      -o-transition: width 0.3s ease-out, background-color 0.3s ease-out,
-        opacity 0.3s ease-out;
-      transition: width 0.3s ease-out, background-color 0.3s ease-out,
-        opacity 0.3s ease-out;
+      transform: translateX(350px);
+      width: 350px;
+
+      -webkit-transition: transform 0.3s ease-in-out,
+        background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      -moz-transition: transform 0.3s ease-in-out,
+        background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      -ms-transition: transform 0.3s ease-in-out,
+        background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      -o-transition: transform 0.3s ease-in-out,
+        background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
+        opacity 0.3s ease-in-out;
 
       &.active {
-        visibility: visible;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         opacity: 1;
-        height: 100%;
-        top: 0;
-        background-color: white;
-        width: 350px;
+        background-color: var(--v-drawerBackground-base);
         overflow-x: hidden;
+        transform: translateX(0);
       }
 
       .nav-close-btn {
@@ -218,23 +213,12 @@ header {
   }
 
   & > span {
-    background-color: var(--v-text-base);
+    background-color: var(--v-colorText-base);
     width: 30px;
     display: inline-block;
     height: 3px;
     margin-bottom: 5px;
     opacity: 1;
-
-    /*     -webkit-transition: transform 0.3s ease-out, background-color 0.3s ease-out,
-      opacity 0.3s ease;
-    -moz-transition: transform 0.3s ease-out, background-color 0.3s ease-out,
-      opacity 0.3s ease;
-    -ms-transition: transform 0.3s ease-out, background-color 0.3s ease-out,
-      opacity 0.3s ease;
-    -o-transition: transform 0.3s ease-out, background-color 0.3s ease-out,
-      opacity 0.3s ease;
-    transition: transform 0.3s ease-out, background-color 0.3s ease-out,
-      opacity 0.3s ease; */
 
     &:first-child {
       transform-origin: 0px 0px;
@@ -244,20 +228,6 @@ header {
       transform-origin: 0px 0px;
     }
   }
-
-  /* &.active {
-    & > span:first-child {
-      transform: rotate(45deg);
-      transform-origin: 3px 2px;
-    }
-    & > span:nth-child(2) {
-      opacity: 0;
-    }
-    & > span:last-child {
-      transform: rotate(-45deg);
-      transform-origin: 4.5px 2px;
-    }
-  } */
 }
 
 @media screen and (max-width: $breakpoint-sm) {
@@ -277,7 +247,8 @@ header {
 @media screen and (max-width: $breakpoint-xs) {
   header {
     &.simple {
-      .nav-link.active {
+      .nav-link {
+        transform: translateX(100%);
         width: 100%;
       }
     }

@@ -25,7 +25,7 @@ export default {
   css: [
     "~/assets/styles/global.scss",
     "~/assets/styles/post.scss",
-    "~/assets/styles/prism.css"
+    "~/assets/styles/prism.css",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -71,15 +71,18 @@ export default {
           info: "#007095",
           success: "#4CAF50",
           warning: "#FFC107",
-          text: "#2E2C2F",
-          background: "#ffffff",
+          colorText: "#2E2C2F",
+          background: "#f7f7f7",
+          drawerBackground: "#f7f7f7",
           themeBtn: "#FF6C00",
           borderLine: "#cacaca",
           dividerBorderLine: "#e3e3e3",
           blockquote: "#0087ff",
-          vCard: "#fdfdfd",
-          editorButton: "#8be2ff",
-          inlineCodeText: "#d22222",
+          inlineCodeText: "#bf2525",
+          inlineCodeBackground: "#eaeaea",
+          codeBackground: "#011627",
+          tableHeader: "#353535",
+          tableHighLight: "#ececec",
         },
         dark: {
           // TODO: https://color.hailpixel.com/#6CBFE8,2E2C2F,E8E8E8,CAF0F8,B9B9B9
@@ -90,22 +93,25 @@ export default {
           info: "#2196F3",
           success: "#4CAF50",
           warning: "#FFC107",
-          text: "#e8e8e8",
-          background: "#2E2C2F",
+          colorText: "#DBDBDB",
+          background: "#201e1e",
+          drawerBackground: "#282727",
           themeBtn: "#FFC107",
           borderLine: "#797979",
           dividerBorderLine: "#e3e3e3",
           blockquote: "#0087ff",
-          vCard: "#373737",
-          editorButton: "#0d829d",
+          inlineCodeText: "#ff8a8a",
+          inlineCodeBackground: "#353535",
+          codeBackground: "#2f2f2f",
+          tableHeader: "#3e3e3e",
+          tableHighLight: "#2b2b2b",
         },
       },
     },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: {},
 
   router: {
     middleware: ["meta"],

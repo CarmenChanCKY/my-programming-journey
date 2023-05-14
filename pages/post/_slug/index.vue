@@ -16,7 +16,7 @@
               <div>{{ postData.category }}</div>
             </div>
           </div>
-          <div style="display: flex; align-items: center">
+          <div class="post-tag-container">
             <v-icon>{{ tagIcon }}</v-icon>
             <div
               v-for="(tag, index) of postData.tags"
@@ -34,7 +34,9 @@
           <p class="ref-heading">Reference</p>
           <ul class="ref-ul">
             <li v-for="(reference, index) of postData.reference" :key="index">
-              <a :href="reference.hyperlink">{{ reference.name }}</a>
+              <a :href="reference.hyperlink" target="_blank">{{
+                reference.name
+              }}</a>
             </li>
           </ul>
         </section>
@@ -164,7 +166,6 @@ export default class Post extends Vue {
 </script>
 
 <style lang="scss" scoped>
-/* TODO: css */
 @import "~/assets/styles/global.scss";
 
 .post-container {
@@ -183,37 +184,24 @@ export default class Post extends Vue {
   margin-bottom: 20px;
 }
 
-.post-info {
-  @extend %post-info;
-}
-
-.post-date {
-  @extend %button;
-}
-
-.post-category {
-  @extend %button;
-
-  &:hover {
-    @extend %button-hover;
-  }
-}
-
-.post-tag {
-  @extend %post-card-tag;
-  margin-top: 5px;
-  margin-bottom: 5px;
-
-  &:hover {
-    @extend %post-card-tag-hover;
-  }
-}
-
 .post-reference {
+  margin-top: 50px;
   .ref-heading {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 5px !important;
   }
 
   .ref-ul {
+    padding-left: 20px;
+
+    & > li {
+      padding-left: 5px;
+
+      & > a:hover {
+        border-bottom: 2px solid var(--v-primary-base);
+      }
+    }
   }
 }
 
@@ -221,10 +209,11 @@ export default class Post extends Vue {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin-top: 100px;
+  margin-bottom: 40px;
 
   & > a {
+    font-weight: bold;
     width: 45%;
     display: flex;
     align-items: center;
@@ -251,8 +240,34 @@ export default class Post extends Vue {
 }
 
 @media screen and (max-width: $breakpoint-md) {
-  .next-previous-container{
+  .next-previous-container {
     flex-direction: column;
+
+    & > a {
+      width: 100%;
+      align-items: flex-start;
+      flex-direction: column;
+
+      &:last-child {
+        flex-direction: column-reverse;
+        text-align: left;
+        margin-top: 30px;
+
+        & > .v-icon {
+          margin-left: 0 !important;
+        }
+      }
+
+      & > .v-icon {
+        font-size: 28px !important;
+        width: 28px !important;
+        height: 28px !important;
+      }
+    }
+  }
+
+  .next-previous-container {
+    margin-top: 80px;
   }
 }
 </style>
