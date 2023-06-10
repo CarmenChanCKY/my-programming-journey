@@ -13,7 +13,7 @@ html,
 body {
   min-height: 100%;
   height: 100%;
-  font-size: var(--text-size);
+  font-size: var(--text-size) !important;
 }
 
 a {
@@ -68,7 +68,7 @@ p {
   border-radius: 3px;
   padding: 2px 5px;
   margin-right: 12px;
-  font-size: 12px;
+  font-size: 0.667rem;
   color: var(--v-primary-base);
 }
 
@@ -124,7 +124,6 @@ p {
   @extend %post-info;
 }
 
-
 .post-date {
   @extend %button;
 }
@@ -145,6 +144,11 @@ p {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
+  & .v-icon {
+    color: var(--v-secondary-base);
+  }
+
   & > .post-tag {
     @extend %post-card-tag;
     margin-top: 5px;
@@ -153,5 +157,35 @@ p {
     &:hover {
       @extend %post-card-tag-hover;
     }
+  }
+}
+
+.post-type,
+.post-empty {
+  @extend %center-div;
+}
+
+.post-type {
+  @extend %heading-font;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+  word-spacing: 5px;
+  color: var(--v-searchResultText-base);
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .post-type {
+    font-size: 1.556rem;
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  .post-type {
+    font-size: 1.444rem;
+    margin-top: 20px;
+    margin-bottom: 0;
   }
 }

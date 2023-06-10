@@ -41,17 +41,17 @@ footer {
   }
 
   .footer-copyright {
-    font-size: 14px;
+    font-size: 0.778rem;
   }
 
   .footer-link {
-    font-size: 14px;
+    font-size: 0.778rem;
     display: flex;
     align-items: center;
 
     & > a {
       color: var(--v-primary-base);
-      font-size: 14px;
+      font-size: 0.778rem;
       text-decoration: none;
 
       &:first-child {

@@ -35,6 +35,6 @@ $material-dark: map-deep-merge(
 
 @media screen and (max-width: $breakpoint-sm) {
   :root {
-    --post-title-size: 1.333rem;
+    --post-title-size: var(--text-size);;
   }
 }

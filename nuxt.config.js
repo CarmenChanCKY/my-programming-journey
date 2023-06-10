@@ -83,6 +83,9 @@ export default {
           codeBackground: "#011627",
           tableHeader: "#353535",
           tableHighLight: "#ececec",
+          textFieldBackground: "#f7f7f7",
+          textfieldBorder: "#c8c8c8",
+          searchResultText: "#484848",
         },
         dark: {
           // TODO: https://color.hailpixel.com/#6CBFE8,2E2C2F,E8E8E8,CAF0F8,B9B9B9
@@ -105,6 +108,9 @@ export default {
           codeBackground: "#2f2f2f",
           tableHeader: "#3e3e3e",
           tableHighLight: "#2b2b2b",
+          textFieldBackground: "#333333",
+          textfieldBorder: "#404040",
+          searchResultText: "#c6c6c6",
         },
       },
     },

@@ -188,7 +188,7 @@ export default class Post extends Vue {
   margin-top: 50px;
   .ref-heading {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 1.333rem;
     margin-bottom: 5px !important;
   }
 
@@ -259,9 +259,9 @@ export default class Post extends Vue {
       }
 
       & > .v-icon {
-        font-size: 28px !important;
-        width: 28px !important;
-        height: 28px !important;
+        font-size: 1.556rem !important;
+        width: 1.556rem !important;
+        height: 1.556rem !important;
       }
     }
   }

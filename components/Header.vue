@@ -25,7 +25,7 @@
           <v-icon large>{{ mdiClose }}</v-icon>
         </v-btn>
       </div>
-      <NuxtLink to="/">
+      <NuxtLink to="/" v-if="headerClass === 'simple'">
         <div>Home</div>
       </NuxtLink>
       <NuxtLink to="/">
@@ -38,6 +38,7 @@
         <div>Archive</div>
       </NuxtLink>
       <ChangeTheme></ChangeTheme>
+      <SearchBar :currentHeaderType="headerClass"></SearchBar>
     </div>
   </header>
 </template>
@@ -45,10 +46,11 @@
 <script lang="ts">
 import { Vue, Component, Watch } from "vue-property-decorator";
 import ChangeTheme from "~/components/ChangeTheme.vue";
+import SearchBar from "~/components/SearchBar.vue";
 import Logo from "~/components/Logo.vue";
 import { mdiClose } from "@mdi/js";
 
-@Component({ components: { ChangeTheme, Logo } })
+@Component({ components: { ChangeTheme, SearchBar, Logo } })
 export default class Header extends Vue {
   mdiClose: string = mdiClose;
 
@@ -111,9 +113,9 @@ header {
       justify-content: space-between;
       align-items: center;
 
-      & div {
+      & div:not(.search-btn-container) {
         @extend %main-title-font;
-        font-size: 20px;
+        font-size: 1.111rem;
         color: var(--v-primary-base);
 
         &:hover {
@@ -185,7 +187,7 @@ header {
 
         & > div {
           @extend %main-title-font;
-          font-size: 20px;
+          font-size: 1.111rem;
           color: var(--v-primary-base);
 
           &:hover {

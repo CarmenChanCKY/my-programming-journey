@@ -95,7 +95,7 @@ export default class PostPage extends Vue {
 
 .pagination {
   @extend %button;
-  font-size: 18px;
+  font-size: 1.125rem;
 
   &:hover {
     @extend %button-hover;
