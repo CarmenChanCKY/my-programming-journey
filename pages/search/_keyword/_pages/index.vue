@@ -1,5 +1,5 @@
 <template>
-  <div style="flex-grow: 1">
+  <div>
     <template v-if="totalPost !== 0">
       <div class="post-type">
         Search Result: {{ $route.params.keyword.replaceAll("-", " ") }}
@@ -35,8 +35,8 @@ export default class SearchIndex extends Vue {
 
   async fetch() {
     try {
-      let keyword: any = "";
-      let pages: any = 1;
+      let keyword: string = "";
+      let pages: number = 1;
 
       if (this.$route.params.keyword !== undefined) {
         keyword = this.$route.params.keyword.replaceAll("-", " ");

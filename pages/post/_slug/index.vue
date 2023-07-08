@@ -1,74 +1,68 @@
 <template>
-  <div>
-    <section class="post-container">
-      <div>
-        <section class="post-header-container">
-          <div class="post-title">
-            {{ postData.title }}
-          </div>
-          <div class="post-info">
-            <div class="post-date">
-              <v-icon>{{ dateIcon }}</v-icon>
-              <div>{{ postData.date }}</div>
-            </div>
-            <div class="post-category">
-              <v-icon>{{ categoryIcon }}</v-icon>
-              <div>{{ postData.category }}</div>
-            </div>
-          </div>
-          <div class="post-tag-container">
-            <v-icon>{{ tagIcon }}</v-icon>
-            <div
-              v-for="(tag, index) of postData.tags"
-              :key="index"
-              class="post-tag"
-            >
-              {{ tag.name }}
-            </div>
-          </div>
-        </section>
-
-        <section class="post-content" v-html="content"></section>
-
-        <section class="post-reference" v-if="postData.reference.length > 0">
-          <p class="ref-heading">Reference</p>
-          <ul class="ref-ul">
-            <li v-for="(reference, index) of postData.reference" :key="index">
-              <a :href="reference.hyperlink" target="_blank">{{
-                reference.name
-              }}</a>
-            </li>
-          </ul>
-        </section>
-
-        <div class="next-previous-container">
-          <NuxtLink
-            class="next-btn"
-            :style="{
-              visibility: $validator.isValid(nextPost) ? 'visible' : 'hidden',
-            }"
-            :to="`/post/${nextPost !== null ? nextPost.slug : ''}`"
-          >
-            <v-icon large class="ml-0 mr-2">{{ leftIcon }}</v-icon>
-            {{ nextPost !== null ? nextPost.title : "" }}
-          </NuxtLink>
-
-          <NuxtLink
-            class="previous-btn"
-            :style="{
-              visibility: $validator.isValid(previousPost)
-                ? 'visible'
-                : 'hidden',
-            }"
-            :to="`/post/${previousPost !== null ? previousPost.slug : ''}`"
-          >
-            {{ previousPost !== null ? previousPost.title : "" }}
-            <v-icon large class="mr-0 ml-2">{{ rightIcon }}</v-icon>
-          </NuxtLink>
+  <section class="post-container">
+    <section class="post-header-container">
+      <div class="post-title">
+        {{ postData.title }}
+      </div>
+      <div class="post-info">
+        <div class="post-date">
+          <v-icon>{{ dateIcon }}</v-icon>
+          <div>{{ postData.date }}</div>
+        </div>
+        <div class="post-category">
+          <v-icon>{{ categoryIcon }}</v-icon>
+          <div>{{ postData.category }}</div>
+        </div>
+      </div>
+      <div class="post-tag-container">
+        <v-icon>{{ tagIcon }}</v-icon>
+        <div
+          v-for="(tag, index) of postData.tags"
+          :key="index"
+          class="post-tag"
+        >
+          {{ tag.name }}
         </div>
       </div>
     </section>
-  </div>
+
+    <section class="post-content" v-html="content"></section>
+
+    <section class="post-reference" v-if="postData.reference.length > 0">
+      <p class="ref-heading">Reference</p>
+      <ul class="ref-ul">
+        <li v-for="(reference, index) of postData.reference" :key="index">
+          <a :href="reference.hyperlink" target="_blank">{{
+            reference.name
+          }}</a>
+        </li>
+      </ul>
+    </section>
+
+    <div class="next-previous-container">
+      <NuxtLink
+        class="next-btn"
+        :style="{
+          visibility: $validator.isValid(nextPost) ? 'visible' : 'hidden',
+        }"
+        :to="`/post/${nextPost !== null ? nextPost.slug : ''}`"
+      >
+        <v-icon large class="ml-0 mr-2">{{ leftIcon }}</v-icon>
+        {{ nextPost !== null ? nextPost.title : "" }}
+      </NuxtLink>
+
+      <NuxtLink
+        class="previous-btn"
+        :style="{
+          visibility: $validator.isValid(previousPost) ? 'visible' : 'hidden',
+        }"
+        :to="`/post/${previousPost !== null ? previousPost.slug : ''}`"
+      >
+        {{ previousPost !== null ? previousPost.title : "" }}
+        <v-icon large class="mr-0 ml-2">{{ rightIcon }}</v-icon>
+      </NuxtLink>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">

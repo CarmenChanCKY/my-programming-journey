@@ -25,7 +25,7 @@ export default class Index extends Vue {
 
   async fetch() {
     try {
-      let pages: any = 1;
+      let pages: number = 1;
       if (this.$route.params.pages !== undefined) {
         if (isNaN(parseInt(this.$route.params.pages))) {
           this.$nuxt.error({ statusCode: 404, message: "Post not found" });

@@ -86,6 +86,7 @@ export default {
           textFieldBackground: "#f7f7f7",
           textfieldBorder: "#c8c8c8",
           searchResultText: "#484848",
+          categoryChip: "#eaeaea",
         },
         dark: {
           // TODO: https://color.hailpixel.com/#6CBFE8,2E2C2F,E8E8E8,CAF0F8,B9B9B9
@@ -111,6 +112,7 @@ export default {
           textFieldBackground: "#333333",
           textfieldBorder: "#404040",
           searchResultText: "#c6c6c6",
+          categoryChip: "#393939",
         },
       },
     },

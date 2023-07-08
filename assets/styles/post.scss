@@ -17,7 +17,7 @@
     background-color: var(--v-inlineCodeBackground-base) !important;
     color: var(--v-inlineCodeText-base) !important;
     border-radius: 3px;
-    font-family: "Source Code Pro", monospace !important;
+    font-family: var(--source-code-pro);
   }
 
   .post-table {
