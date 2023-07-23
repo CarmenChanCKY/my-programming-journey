@@ -5,13 +5,14 @@
         v-for="(data, index) of postData"
         :key="index"
         :post-data="data"
+        :postPath="postPath"
       ></PostCard>
     </section>
     <section class="pagination-container" v-if="!isNaN(currentPage)">
       <div>
         <NuxtLink
           class="prev-btn"
-          :to="`/${parseInt(currentPage.toString()) - 1}`"
+          :to="`${pagePath}/${parseInt(currentPage.toString()) - 1}/`"
           :style="{ visibility: showPreviousBtn ? 'visible' : 'hidden' }"
         >
           <div class="pagination">
@@ -22,7 +23,7 @@
         <div class="current-pages">{{ currentPage }} / {{ totalPage }}</div>
         <NuxtLink
           class="next-btn"
-          :to="`/${parseInt(currentPage.toString()) + 1}`"
+          :to="`${pagePath}/${parseInt(currentPage.toString()) + 1}/`"
           :style="{ visibility: showNextBtn ? 'visible' : 'hidden' }"
         >
           <div class="pagination">
@@ -36,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import PostCard from "~/components/PostCard.vue";
 import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
 import type PostPageInterface from "~/interfaces/PostPageInterface";
@@ -51,12 +52,16 @@ export default class PostPage extends Vue {
   postData!: Array<PostPageInterface>;
   @Prop({ type: Number, default: 1, required: true }) currentPage!: number;
   @Prop({ type: Number, default: 0, required: true }) totalPost!: number;
+  @Prop({ type: String, default: "", required: true }) pageType!: string;
 
   // data
   leftIcon: string = mdiChevronLeft;
   rightIcon: string = mdiChevronRight;
 
   limit: number = 10;
+
+  pagePath: string = "";
+  postPath: string = "";
 
   get totalPage(): number {
     return Math.ceil(this.totalPost / this.limit);
@@ -70,9 +75,26 @@ export default class PostPage extends Vue {
   get showNextBtn() {
     return this.postData.length === this.limit;
   }
+
+  @Watch("pageType", { immediate: true })
+  updatePageType(val: string) {
+    switch (this.pageType) {
+      case "post":
+        this.pagePath = "";
+        this.postPath = "/post";
+        break;
+      case "category":
+        this.pagePath = `/category/search/${this.$route.params.name}`;
+        this.postPath = `/category/detail/${this.$route.params.name}`;
+        break;
+      case "search":
+        this.pagePath = `/post/${this.$route.params.keyword}`;
+        this.postPath = "/post";
+        break;
+    }
+  }
 }
 </script>
-
 
 <style lang="scss" scoped>
 @import "~/assets/styles/global.scss";

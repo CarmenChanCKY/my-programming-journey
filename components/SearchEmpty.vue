@@ -1,9 +1,15 @@
 <template>
   <div class="post-empty">
     <div class="not-found-text">404 Search Not Found</div>
-    <div class="description-text">
-      Search result for {{ $route.params.keyword.replaceAll("-", " ") }} not
-      found.
+    <div
+      class="description-text"
+      v-if="
+        descriptionText !== undefined &&
+        descriptionText !== null &&
+        descriptionText !== ''
+      "
+    >
+      {{ descriptionText }}
     </div>
   </div>
 </template>
@@ -12,7 +18,10 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
-export default class SearchEmpty extends Vue {}
+export default class SearchEmpty extends Vue {
+  @Prop({ required: false, default: "", type: String })
+  descriptionText!: string;
+}
 </script>
 
 <style lang="scss" scoped>

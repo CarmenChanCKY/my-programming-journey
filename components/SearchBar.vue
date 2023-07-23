@@ -67,7 +67,7 @@ export default class SearchBar extends Vue {
       return;
     } else {
       let searchKey = this.searchValue.trim().replaceAll(" ", "-");
-      this.$router.push({ path: `/search/${searchKey}/1` });
+      this.$router.push({ path: `/search/${searchKey}/` });
     }
   }
 }

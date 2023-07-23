@@ -1,10 +1,10 @@
 <template>
   <section class="list-container">
     <div v-for="(item, index) in ListItem" :key="index">
-      <div :id="item.name" class="list-title">{{ item.name }}</div>
+      <div :id="item.listTitle" class="list-title">{{ item.listTitle }}</div>
       <div class="list-item" v-for="data in item.list" :key="data.id">
         <div class="date">{{ data.date }}</div>
-        <NuxtLink :to="`/post/${data.slug}`">
+        <NuxtLink :to="`/post/${data.slug}/`">
           {{ data.title }}
         </NuxtLink>
       </div>
@@ -37,7 +37,7 @@ export default class TitleList extends Vue {
 
 .list-item {
   display: flex;
-  position: relative;
+  border-left: 1px solid var(--v-dividerBorderLine-base);
 
   &:not(:last-child) {
     padding-bottom: 15px;
@@ -47,13 +47,23 @@ export default class TitleList extends Vue {
     font-family: var(--source-code-pro);
     font-size: 0.833rem;
     padding-left: 20px;
-    margin-right: 20px;
     color: var(--v-searchResultText-base);
   }
 
   & > a {
+    padding-left: 20px;
     &:hover {
       color: var(--v-primary-lighten2);
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .list-item {
+    flex-direction: column;
+
+    &:not(:last-child) {
+      padding-bottom: 25px;
     }
   }
 }

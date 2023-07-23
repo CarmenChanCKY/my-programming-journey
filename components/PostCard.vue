@@ -1,6 +1,6 @@
 <template>
   <div class="post-card">
-    <NuxtLink :to="`/post/${postData.slug}`">
+    <NuxtLink :to="`${postPath}/${postData.slug}/`">
       <div class="post-card-title">
         {{ postData.title }}
       </div>
@@ -10,10 +10,13 @@
         <v-icon>{{ dataIcon }}</v-icon>
         <div>{{ postData.date }}</div>
       </div>
-      <div class="post-category">
+      <NuxtLink
+        class="post-category"
+        :to="`/category/search/${postData.category}/`"
+      >
         <v-icon>{{ categoryIcon }}</v-icon>
         <div>{{ postData.category }}</div>
-      </div>
+      </NuxtLink>
     </div>
     <div class="post-tag-container">
       <v-icon>{{ tagIcon }}</v-icon>
@@ -36,6 +39,7 @@ import type PostPageInterface from "~/interfaces/PostPageInterface";
 export default class PostCard extends Vue {
   @Prop({ type: Object, required: true, default: () => {} })
   postData!: PostPageInterface;
+  @Prop({ type: String, default: "", required: true }) postPath!: string;
 
   tagIcon: string = mdiTagOutline;
   dataIcon: string = mdiCalendar;
@@ -77,6 +81,7 @@ export default class PostCard extends Vue {
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-align: justify;
+  word-break: break-all;
 }
 
 .v-icon {

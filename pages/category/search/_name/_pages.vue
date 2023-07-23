@@ -1,16 +1,15 @@
 <template>
   <div>
     <template v-if="totalPost !== 0">
-      <div class="post-type">
-        Search Result: {{ $route.params.keyword.replaceAll("-", " ") }}
-      </div>
+      <div class="post-type">Category: {{ $route.params.name }}</div>
       <PostPage
         :postData="postData"
         :currentPage="currentPage"
         :totalPost="totalPost"
+        :pageType="`category`"
       ></PostPage>
     </template>
-    <SearchEmpty v-else></SearchEmpty>
+    <SearchEmpty v-else :descriptionText="categoryNotFoundText"></SearchEmpty>
   </div>
 </template>
 
@@ -27,34 +26,35 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
   },
   meta: { fullHeader: false },
 })
-export default class SearchIndex extends Vue {
+export default class CategoryPages extends Vue {
   // data
   postData: Array<PostPageInterface> = [];
   currentPage: number | string = 1;
   totalPost: number = 0;
+  categoryNotFoundText: string = "";
 
   async fetch() {
     try {
-      let keyword: string = "";
+      let category: string = "";
       let pages: number = 1;
 
-      if (this.$route.params.keyword !== undefined) {
-        keyword = this.$route.params.keyword.replaceAll("-", " ");
+      if (this.$route.params.name !== undefined) {
+        category = this.$route.params.name;
       } else {
-        this.$nuxt.error({ statusCode: 404, message: "Search not found" });
+        this.$nuxt.error({ statusCode: 404, message: "Category not found" });
       }
 
       if (this.$route.params.pages !== undefined) {
         if (isNaN(parseInt(this.$route.params.pages))) {
-          this.$nuxt.error({ statusCode: 404, message: "Search not found" });
+          this.$nuxt.error({ statusCode: 404, message: "Category not found" });
           return;
         }
 
         pages = parseInt(this.$route.params.pages);
       }
 
-      const postData = await this.$axios.$get("/explore/post", {
-        params: { keyword, pages },
+      const postData = await this.$axios.$get("/categories/list", {
+        params: { category, pages },
       });
 
       const formatData: any = [];
@@ -79,6 +79,10 @@ export default class SearchIndex extends Vue {
     } catch (e) {
       //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }
+  }
+
+  mounted() {
+    this.categoryNotFoundText = `Category ${this.$route.params.name} not found.`;
   }
 }
 </script>

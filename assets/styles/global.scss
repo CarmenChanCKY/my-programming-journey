@@ -140,6 +140,8 @@ p {
 
 .post-category {
   @extend %button;
+  display: flex;
+  align-items: center;
 
   &:hover {
     @extend %button-hover;

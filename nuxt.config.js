@@ -62,7 +62,6 @@ export default {
         customProperties: true,
       },
       themes: {
-        // TODO: https://color.hailpixel.com/#007095,F9F8FF,D0E8F2,2E2C2F,373F51
         light: {
           primary: "#007095",
           secondary: "#757575",
@@ -89,7 +88,6 @@ export default {
           categoryChip: "#eaeaea",
         },
         dark: {
-          // TODO: https://color.hailpixel.com/#6CBFE8,2E2C2F,E8E8E8,CAF0F8,B9B9B9
           primary: "#6cbfe8",
           secondary: "#b9b9b9",
           accent: "#2A8BBB",
@@ -122,6 +120,7 @@ export default {
   build: {},
 
   router: {
+    trailingSlash: true,
     middleware: ["meta"],
     scrollBehavior(to, from, savedPosition) {
       document.body.scrollTo(0, 0);

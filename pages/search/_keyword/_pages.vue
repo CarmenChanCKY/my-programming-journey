@@ -1,43 +1,62 @@
 <template>
-  <PostPage
-    :postData="postData"
-    :currentPage="currentPage"
-    :totalPost="totalPost"
-    :pageType="'post'"
-  ></PostPage>
+  <div>
+    <template v-if="totalPost !== 0">
+      <div class="post-type">
+        Search Result: {{ $route.params.keyword.replaceAll("-", " ") }}
+      </div>
+      <PostPage
+        :postData="postData"
+        :currentPage="currentPage"
+        :totalPost="totalPost"
+        :pageType="`search`"
+      ></PostPage>
+    </template>
+    <SearchEmpty v-else :descriptionText="searchNotFoundText"></SearchEmpty>
+  </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import PostPage from "~/components/PostPage.vue";
+import SearchEmpty from "~/components/SearchEmpty.vue";
 import PostPageInterface from "~/interfaces/PostPageInterface";
 
 @Component({
   components: {
     PostPage,
+    SearchEmpty,
   },
-  meta: { fullHeader: true },
+  meta: { fullHeader: false },
 })
-export default class Index extends Vue {
+export default class SearchIndex extends Vue {
   // data
   postData: Array<PostPageInterface> = [];
   currentPage: number | string = 1;
   totalPost: number = 0;
+  searchNotFoundText: string = "";
 
   async fetch() {
     try {
+      let keyword: string = "";
       let pages: number = 1;
+
+      if (this.$route.params.keyword !== undefined) {
+        keyword = this.$route.params.keyword.replaceAll("-", " ");
+      } else {
+        this.$nuxt.error({ statusCode: 404, message: "Search not found" });
+      }
+
       if (this.$route.params.pages !== undefined) {
         if (isNaN(parseInt(this.$route.params.pages))) {
-          this.$nuxt.error({ statusCode: 404, message: "Post not found" });
+          this.$nuxt.error({ statusCode: 404, message: "Search not found" });
           return;
         }
 
         pages = parseInt(this.$route.params.pages);
       }
 
-      const postData = await this.$axios.$get("/post/list", {
-        params: { pages },
+      const postData = await this.$axios.$get("/explore/post", {
+        params: { keyword, pages },
       });
 
       const formatData: any = [];
@@ -62,6 +81,13 @@ export default class Index extends Vue {
     } catch (e) {
       //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }
+  }
+
+  mounted() {
+    this.searchNotFoundText = `Search result for ${this.$route.params.keyword.replaceAll(
+      "-",
+      " "
+    )} not found.`;
   }
 }
 </script>

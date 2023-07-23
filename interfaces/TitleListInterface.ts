@@ -1,4 +1,4 @@
 export default interface TitleListInterface {
-  name: string;
+  listTitle: string;
   list: Array<any>;
 }

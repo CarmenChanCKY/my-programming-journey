@@ -28,7 +28,7 @@
       <NuxtLink to="/" v-if="headerClass === 'simple'">
         <div>Home</div>
       </NuxtLink>
-      <NuxtLink to="/category">
+      <NuxtLink to="/category/">
         <div>Category</div>
       </NuxtLink>
       <NuxtLink to="/">
