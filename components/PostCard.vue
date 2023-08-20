@@ -1,6 +1,6 @@
 <template>
   <div class="post-card">
-    <NuxtLink :to="`${postPath}/${postData.slug}/`">
+    <NuxtLink :to="postRouter">
       <div class="post-card-title">
         {{ postData.title }}
       </div>
@@ -12,7 +12,10 @@
       </div>
       <NuxtLink
         class="post-category"
-        :to="`/category/search/${postData.category}/`"
+        :to="{
+          name: 'SearchCategoryResult',
+          params: { keyword: postData.category },
+        }"
       >
         <v-icon>{{ categoryIcon }}</v-icon>
         <div>{{ postData.category }}</div>
@@ -34,12 +37,14 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { mdiTagOutline, mdiCalendar, mdiFolderOutline } from "@mdi/js";
 import type PostPageInterface from "~/interfaces/PostPageInterface";
+import type RouterLinkInterface from "~/interfaces/RouterLinkInterface";
 
 @Component
 export default class PostCard extends Vue {
   @Prop({ type: Object, required: true, default: () => {} })
   postData!: PostPageInterface;
-  @Prop({ type: String, default: "", required: true }) postPath!: string;
+  @Prop({ type: Object, default: () => {}, required: true })
+  postRouter!: RouterLinkInterface;
 
   tagIcon: string = mdiTagOutline;
   dataIcon: string = mdiCalendar;
@@ -82,6 +87,7 @@ export default class PostCard extends Vue {
   overflow: hidden;
   text-align: justify;
   word-break: break-all;
+  letter-spacing: 0.2px;
 }
 
 .v-icon {

@@ -22,7 +22,7 @@ import TitleList from "~/components/TitleList.vue";
 import type TitleListInterface from "~/interfaces/TitleListInterface";
 
 @Component({ components: { TitleList }, meta: { fullHeader: false } })
-export default class Category extends Vue {
+export default class CategoryList extends Vue {
   categoryList: Array<any> = [];
   postList: Array<TitleListInterface> = [];
 
@@ -45,8 +45,8 @@ export default class Category extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
+  
+  <style lang="scss" scoped>
 @import "~/assets/styles/global.scss";
 
 .category-container {
@@ -72,3 +72,4 @@ export default class Category extends Vue {
 .category-list-container {
 }
 </style>
+  

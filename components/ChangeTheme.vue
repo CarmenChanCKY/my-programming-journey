@@ -30,6 +30,7 @@ export default class ChangeTheme extends Vue {
   updateTheme() {
     const currentTheme = this.theme;
     this.$vuetify.theme.dark = currentTheme;
+    this.$colorMode.preference = currentTheme ? "dark" : "light";
   }
 
   // lifecycle

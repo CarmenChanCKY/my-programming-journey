@@ -22,6 +22,7 @@ export default ({ app, store }) => {
     browserDarkTheme = currentTheme === "1" ? true : false;
   }
 
+  app.$colorMode.preference = currentTheme === "1" ? "dark" : "light";
   app.vuetify.framework.theme.isDark = browserDarkTheme;
 
   store.dispatch("persistent/setTheme", browserDarkTheme);

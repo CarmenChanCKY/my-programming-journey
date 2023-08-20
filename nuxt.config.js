@@ -51,7 +51,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/router", "@nuxtjs/color-mode"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -96,7 +96,7 @@ export default {
           success: "#4CAF50",
           warning: "#FFC107",
           colorText: "#DBDBDB",
-          background: "#201e1e",
+          background: "#2b2929",
           drawerBackground: "#282727",
           themeBtn: "#FFC107",
           borderLine: "#797979",
@@ -104,9 +104,9 @@ export default {
           blockquote: "#0087ff",
           inlineCodeText: "#ff8a8a",
           inlineCodeBackground: "#353535",
-          codeBackground: "#2f2f2f",
+          codeBackground: "#333",
           tableHeader: "#3e3e3e",
-          tableHighLight: "#2b2b2b",
+          tableHighLight: "#2f2f2f",
           textFieldBackground: "#333333",
           textfieldBorder: "#404040",
           searchResultText: "#c6c6c6",

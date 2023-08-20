@@ -16,9 +16,8 @@ import type OtherPostInterface from "~/interfaces/OtherPostInterface";
 @Component({
   components: { PostDetail },
   watchQuery: ["page"],
-  meta: { fullHeader: false },
 })
-export default class Post extends Vue {
+export default class PostContent extends Vue {
   // data
   postData: PostDetailInterface = {
     id: -1,

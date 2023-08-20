@@ -11,7 +11,10 @@
         </div>
         <NuxtLink
           class="post-category"
-          :to="`/category/search/${postData.category}/`"
+          :to="{
+            name: 'SearchCategoryResult',
+            params: { keyword: postData.category },
+          }"
         >
           <v-icon>{{ categoryIcon }}</v-icon>
           <div>{{ postData.category }}</div>
@@ -48,7 +51,11 @@
         :style="{
           visibility: $validator.isValid(nextPost) ? 'visible' : 'hidden',
         }"
-        :to="`/post/${nextPost !== null ? nextPost.slug + '/' : ''}`"
+        :to="
+          $validator.isValid(nextPost)
+            ? { name: 'PostDetail', params: { slug: nextPost?.slug } }
+            : {}
+        "
       >
         <v-icon large class="ml-0 mr-2">{{ leftIcon }}</v-icon>
         {{ nextPost !== null ? nextPost.title : "" }}
@@ -59,7 +66,11 @@
         :style="{
           visibility: $validator.isValid(previousPost) ? 'visible' : 'hidden',
         }"
-        :to="`/post/${previousPost !== null ? previousPost.slug + '/' : ''}`"
+        :to="
+          $validator.isValid(previousPost)
+            ? { name: 'PostDetail', params: { slug: previousPost?.slug } }
+            : {}
+        "
       >
         {{ previousPost !== null ? previousPost.title : "" }}
         <v-icon large class="mr-0 ml-2">{{ rightIcon }}</v-icon>

@@ -5,14 +5,23 @@
         v-for="(data, index) of postData"
         :key="index"
         :post-data="data"
-        :postPath="postPath"
+        :postRouter="{
+          name: 'PostDetail',
+          params: { slug: data.slug },
+        }"
       ></PostCard>
     </section>
     <section class="pagination-container" v-if="!isNaN(currentPage)">
       <div>
         <NuxtLink
           class="prev-btn"
-          :to="`${pagePath}/${parseInt(currentPage.toString()) - 1}/`"
+          :to="{
+            name: routerName,
+            params: {
+              ...previousRouterParams,
+              pages: parseInt(currentPage.toString()) - 1,
+            },
+          }"
           :style="{ visibility: showPreviousBtn ? 'visible' : 'hidden' }"
         >
           <div class="pagination">
@@ -23,7 +32,13 @@
         <div class="current-pages">{{ currentPage }} / {{ totalPage }}</div>
         <NuxtLink
           class="next-btn"
-          :to="`${pagePath}/${parseInt(currentPage.toString()) + 1}/`"
+          :to="{
+            name: routerName,
+            params: {
+              ...nextRouterParams,
+              pages: parseInt(currentPage.toString()) + 1,
+            },
+          }"
           :style="{ visibility: showNextBtn ? 'visible' : 'hidden' }"
         >
           <div class="pagination">
@@ -50,7 +65,6 @@ import type PostPageInterface from "~/interfaces/PostPageInterface";
 export default class PostPage extends Vue {
   @Prop({ type: Array, default: () => [], required: true })
   postData!: Array<PostPageInterface>;
-  @Prop({ type: Number, default: 1, required: true }) currentPage!: number;
   @Prop({ type: Number, default: 0, required: true }) totalPost!: number;
   @Prop({ type: String, default: "", required: true }) pageType!: string;
 
@@ -60,14 +74,26 @@ export default class PostPage extends Vue {
 
   limit: number = 10;
 
-  pagePath: string = "";
-  postPath: string = "";
+  routerName: string = "";
+
+  previousRouterParams: any = {};
+  nextRouterParams: any = {};
 
   get totalPage(): number {
     return Math.ceil(this.totalPost / this.limit);
   }
 
   // computed
+  get currentPage() {
+    const page = this.$route.params.pages;
+    return page !== undefined &&
+      page !== null &&
+      page !== "" &&
+      !isNaN(parseInt(page))
+      ? parseInt(page)
+      : 1;
+  }
+
   get showPreviousBtn() {
     return this.currentPage >= 2;
   }
@@ -78,18 +104,20 @@ export default class PostPage extends Vue {
 
   @Watch("pageType", { immediate: true })
   updatePageType(val: string) {
+    // TODO: change router path
     switch (this.pageType) {
       case "post":
-        this.pagePath = "";
-        this.postPath = "/post";
+        this.routerName = "Home";
         break;
       case "category":
-        this.pagePath = `/category/search/${this.$route.params.name}`;
-        this.postPath = `/category/detail/${this.$route.params.name}`;
+        this.routerName = "SearchCategoryResult";
+        this.previousRouterParams = { keyword: this.$route.params.keyword };
+        this.nextRouterParams = { keyword: this.$route.params.keyword };
         break;
       case "search":
-        this.pagePath = `/post/${this.$route.params.keyword}`;
-        this.postPath = "/post";
+        this.routerName = "SearchKeywordResult";
+        this.previousRouterParams = { keyword: this.$route.params.keyword };
+        this.nextRouterParams = { keyword: this.$route.params.keyword };
         break;
     }
   }

@@ -1,15 +1,17 @@
 <template>
   <div>
     <template v-if="totalPost !== 0">
-      <div class="post-type">Category: {{ $route.params.name }}</div>
+      <div class="post-type">
+        {{ resultText }}: {{ $route.params.keyword.replaceAll("-", " ") }}
+      </div>
       <PostPage
         :postData="postData"
         :currentPage="currentPage"
         :totalPost="totalPost"
-        :pageType="`category`"
+        :pageType="$route.meta?.source"
       ></PostPage>
     </template>
-    <SearchEmpty v-else :descriptionText="categoryNotFoundText"></SearchEmpty>
+    <SearchEmpty v-else :descriptionText="searchNotFoundText"></SearchEmpty>
   </div>
 </template>
 
@@ -24,38 +26,47 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
     PostPage,
     SearchEmpty,
   },
-  meta: { fullHeader: false },
 })
-export default class CategoryPages extends Vue {
+export default class SearchResult extends Vue {
   // data
   postData: Array<PostPageInterface> = [];
   currentPage: number | string = 1;
   totalPost: number = 0;
-  categoryNotFoundText: string = "";
+  searchNotFoundText: string = "";
+  resultText: string = "";
+  errorMessage: string = "";
 
   async fetch() {
     try {
-      let category: string = "";
+      let keyword: string = "";
       let pages: number = 1;
 
-      if (this.$route.params.name !== undefined) {
-        category = this.$route.params.name;
+      if (this.$route.params.keyword !== undefined) {
+        keyword = this.$route.params.keyword.replaceAll("-", " ");
       } else {
-        this.$nuxt.error({ statusCode: 404, message: "Category not found" });
+        this.$nuxt.error({ statusCode: 404, message: this.errorMessage });
       }
 
       if (this.$route.params.pages !== undefined) {
         if (isNaN(parseInt(this.$route.params.pages))) {
-          this.$nuxt.error({ statusCode: 404, message: "Category not found" });
+          this.$nuxt.error({ statusCode: 404, message: this.errorMessage });
           return;
         }
 
         pages = parseInt(this.$route.params.pages);
       }
 
-      const postData = await this.$axios.$get("/categories/list", {
-        params: { category, pages },
-      });
+      let key = "";
+      let params: any = { pages };
+      if (this.$route.meta?.source === "search") {
+        key = "/explore/post";
+        params = { ...params, keyword };
+      } else if (this.$route.meta?.source === "category") {
+        key = "/categories/list";
+        params = { ...params, category: keyword };
+      }
+
+      const postData = await this.$axios.$get(key, { params });
 
       const formatData: any = [];
 
@@ -82,7 +93,17 @@ export default class CategoryPages extends Vue {
   }
 
   mounted() {
-    this.categoryNotFoundText = `Category ${this.$route.params.name} not found.`;
+    const keyword = this.$route.params.keyword.replaceAll("-", " ");
+
+    if (this.$route.meta?.source === "search") {
+      this.resultText = "Search Result";
+      this.errorMessage = "Search not found";
+      this.searchNotFoundText = `Search result for ${keyword} not found.`;
+    } else if (this.$route.meta?.source === "category") {
+      this.resultText = "Category";
+      this.errorMessage = "Category not found";
+      this.searchNotFoundText = `Category ${keyword} not found.`;
+    }
   }
 }
 </script>

@@ -1,7 +1,6 @@
 <template>
   <PostPage
     :postData="postData"
-    :currentPage="currentPage"
     :totalPost="totalPost"
     :pageType="'post'"
   ></PostPage>
@@ -16,12 +15,10 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
   components: {
     PostPage,
   },
-  meta: { fullHeader: true },
 })
-export default class Index extends Vue {
+export default class Home extends Vue {
   // data
   postData: Array<PostPageInterface> = [];
-  currentPage: number | string = 1;
   totalPost: number = 0;
 
   async fetch() {
@@ -58,7 +55,6 @@ export default class Index extends Vue {
 
       this.postData = formatData;
       this.totalPost = postData.total;
-      this.currentPage = pages;
     } catch (e) {
       //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }

@@ -4,7 +4,7 @@
       <div :id="item.listTitle" class="list-title">{{ item.listTitle }}</div>
       <div class="list-item" v-for="data in item.list" :key="data.id">
         <div class="date">{{ data.date }}</div>
-        <NuxtLink :to="`/post/${data.slug}/`">
+        <NuxtLink :to="{ name: 'PostDetail', params: { slug: data.slug } }">
           {{ data.title }}
         </NuxtLink>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <header :class="headerClass">
-    <NuxtLink class="main-title-link" to="/">
+    <NuxtLink class="main-title-link" :to="{ name: 'Home' }">
       <div v-if="headerClass === 'full'" class="website-title">
         My Programming Journey
       </div>
@@ -25,10 +25,10 @@
           <v-icon large>{{ mdiClose }}</v-icon>
         </v-btn>
       </div>
-      <NuxtLink to="/" v-if="headerClass === 'simple'">
+      <NuxtLink :to="{ name: 'Home' }" v-if="headerClass === 'simple'">
         <div>Home</div>
       </NuxtLink>
-      <NuxtLink to="/category/">
+      <NuxtLink :to="{ name: 'CategoryList' }">
         <div>Category</div>
       </NuxtLink>
       <NuxtLink to="/">
