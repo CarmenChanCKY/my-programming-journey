@@ -15,7 +15,60 @@ import type OtherPostInterface from "~/interfaces/OtherPostInterface";
 
 @Component({
   components: { PostDetail },
-  watchQuery: ["page"],
+  async asyncData(context) {
+    try {
+      // get post data
+      let slug = "";
+      if (context.route.params.slug !== undefined) {
+        slug = context.route.params.slug;
+      }
+
+      const getPostDetail = await context.$axios.$get("/post/detail", {
+        params: { slug },
+      });
+
+      const postData = {
+        id: getPostDetail.id,
+        slug: context.route.params.slug,
+        title: getPostDetail.title,
+        date: getPostDetail.date,
+        category: getPostDetail.category_name,
+        category_id: getPostDetail.category_id,
+        tags: getPostDetail.tags_data,
+        reference:
+          getPostDetail.reference_array !== undefined &&
+          Array.isArray(getPostDetail.reference_array)
+            ? getPostDetail.reference_array
+            : [],
+      };
+
+      const content = getPostDetail.content;
+
+      // get previous post
+      const getPreviousPost = await context.$axios.$get("/post/previous", {
+        params: { id: getPostDetail.id },
+      });
+
+      let previousPost = null;
+      if (Object.keys(getPreviousPost).length > 0) {
+        previousPost = getPreviousPost;
+      }
+
+      // get next post
+      const getNextPost = await context.$axios.$get("/post/next", {
+        params: { id: getPostDetail.id },
+      });
+
+      let nextPost = null;
+      if (Object.keys(getNextPost).length > 0) {
+        nextPost = getNextPost;
+      }
+
+      return { postData, content, previousPost, nextPost };
+    } catch (e) {
+      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
+    }
+  },
 })
 export default class PostContent extends Vue {
   // data
@@ -33,7 +86,7 @@ export default class PostContent extends Vue {
   nextPost: OtherPostInterface | null = null;
   content: string = "";
 
-  async fetch() {
+  /*   async fetch() {
     try {
       // get post data
       let slug = "";
@@ -86,6 +139,6 @@ export default class PostContent extends Vue {
     } catch (e) {
       //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }
-  }
+  } */
 }
 </script>

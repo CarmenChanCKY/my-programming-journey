@@ -59,7 +59,7 @@ export default {
     customVariables: ["~/assets/styles/variables.scss"],
     theme: {
       options: {
-        customProperties: true,
+        customProperties: true
       },
       themes: {
         light: {
@@ -79,7 +79,7 @@ export default {
           blockquote: "#0087ff",
           inlineCodeText: "#bf2525",
           inlineCodeBackground: "#eaeaea",
-          codeBackground: "#011627",
+          codeBackground: "#1f2224",
           tableHeader: "#353535",
           tableHighLight: "#ececec",
           textFieldBackground: "#f7f7f7",
@@ -97,7 +97,7 @@ export default {
           warning: "#FFC107",
           colorText: "#DBDBDB",
           background: "#2b2929",
-          drawerBackground: "#282727",
+          drawerBackground: "#333131",
           themeBtn: "#FFC107",
           borderLine: "#797979",
           dividerBorderLine: "#e3e3e3",

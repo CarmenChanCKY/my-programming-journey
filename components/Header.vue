@@ -31,7 +31,7 @@
       <NuxtLink :to="{ name: 'CategoryList' }">
         <div>Category</div>
       </NuxtLink>
-      <NuxtLink to="/">
+      <NuxtLink :to="{ name: 'TagList' }">
         <div>Tags</div>
       </NuxtLink>
       <NuxtLink to="/">

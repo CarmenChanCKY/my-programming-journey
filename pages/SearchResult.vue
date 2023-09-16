@@ -26,6 +26,85 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
     PostPage,
     SearchEmpty,
   },
+  async asyncData(context) {
+    try {
+      const source: string =
+        context.route.meta !== undefined ? context.route.meta[0].source : "";
+      let keyword: string = context.route.params.keyword;
+      let pages: number = 1;
+
+      let resultText = "";
+      let errorMessage = "";
+      let searchNotFoundText = "";
+      let key = "";
+
+      if (source === "search") {
+        errorMessage = "Search not found";
+      } else if (source === "category") {
+        errorMessage = "Category not found";
+      } else {
+        context.error({ statusCode: 404, message: "Page Not Found" });
+      }
+
+      if (this.$validator.isValid(keyword)) {
+        keyword = context.route.params.keyword.replaceAll("-", " ");
+      } else {
+        context.error({ statusCode: 404, message: errorMessage });
+        return;
+      }
+
+      if (context.route.params.pages !== undefined) {
+        if (isNaN(parseInt(context.route.params.pages))) {
+          context.error({ statusCode: 404, message: errorMessage });
+          return;
+        }
+
+        pages = parseInt(context.route.params.pages);
+      }
+
+      let params: any = { pages };
+      if (source === "search") {
+        resultText = "Search Result";
+        searchNotFoundText = `Search result for ${keyword} not found.`;
+        key = "/explore/post";
+        params = { ...params, keyword };
+      } else if (source === "category") {
+        resultText = "Category";
+        searchNotFoundText = `Category ${keyword} not found.`;
+        key = "/categories/list";
+        params = { ...params, category: keyword };
+      }
+
+      const postData: any = await context.$axios.$get(key, { params });
+
+      const formatData: any = [];
+
+      if (this.$validator.isValid(postData.data)) {
+        for (let i = 0; i < postData.data.length; i++) {
+          const data = {
+            title: postData.data[i].title,
+            date: postData.data[i].date,
+            slug: postData.data[i].slug,
+            category: postData.data[i].category_name,
+            category_id: postData.data[i].category_id,
+            tags: postData.data[i].tags_data,
+            preview: postData.data[i].content,
+          };
+
+          formatData.push(data);
+        }
+      }
+      return {
+        postData: formatData,
+        totalPost: this.$validator.isValid(postData.total) ? postData.total : 0,
+        currentPage: pages,
+        searchNotFoundText,
+        resultText,
+      };
+    } catch (e) {
+      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
+    }
+  },
 })
 export default class SearchResult extends Vue {
   // data
@@ -34,34 +113,33 @@ export default class SearchResult extends Vue {
   totalPost: number = 0;
   searchNotFoundText: string = "";
   resultText: string = "";
-  errorMessage: string = "";
 
-  async fetch() {
+  /*  async fetch() {
     try {
       let keyword: string = "";
       let pages: number = 1;
 
-      if (this.$route.params.keyword !== undefined) {
-        keyword = this.$route.params.keyword.replaceAll("-", " ");
+      if (context.route.params.keyword !== undefined) {
+        keyword = context.route.params.keyword.replaceAll("-", " ");
       } else {
         this.$nuxt.error({ statusCode: 404, message: this.errorMessage });
       }
 
-      if (this.$route.params.pages !== undefined) {
-        if (isNaN(parseInt(this.$route.params.pages))) {
+      if (context.route.params.pages !== undefined) {
+        if (isNaN(parseInt(context.route.params.pages))) {
           this.$nuxt.error({ statusCode: 404, message: this.errorMessage });
           return;
         }
 
-        pages = parseInt(this.$route.params.pages);
+        pages = parseInt(context.route.params.pages);
       }
 
       let key = "";
       let params: any = { pages };
-      if (this.$route.meta?.source === "search") {
+      if (context.route.meta?.source === "search") {
         key = "/explore/post";
         params = { ...params, keyword };
-      } else if (this.$route.meta?.source === "category") {
+      } else if (context.route.meta?.source === "category") {
         key = "/categories/list";
         params = { ...params, category: keyword };
       }
@@ -90,20 +168,20 @@ export default class SearchResult extends Vue {
     } catch (e) {
       //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
     }
-  }
+  } */
 
   mounted() {
-    const keyword = this.$route.params.keyword.replaceAll("-", " ");
+    /*  const keyword = context.route.params.keyword.replaceAll("-", " ");
 
-    if (this.$route.meta?.source === "search") {
+    if (context.route.meta?.source === "search") {
       this.resultText = "Search Result";
       this.errorMessage = "Search not found";
       this.searchNotFoundText = `Search result for ${keyword} not found.`;
-    } else if (this.$route.meta?.source === "category") {
+    } else if (context.route.meta?.source === "category") {
       this.resultText = "Category";
       this.errorMessage = "Category not found";
       this.searchNotFoundText = `Category ${keyword} not found.`;
-    }
+    } */
   }
 }
 </script>

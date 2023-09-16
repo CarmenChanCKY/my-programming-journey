@@ -16,7 +16,6 @@
   </transition-group>
 </template>
 
-
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
 import Header from "~/components/Header.vue";
@@ -28,6 +27,15 @@ import LoadingBar from "~/components/LoadingBar.vue";
 export default class App extends Vue {
   get isLoading() {
     return this.$store.getters["startLoading"];
+  }
+
+  created() {
+    if (this.$validator.isValid(this.$route.meta?.fullHeader)) {
+      this.$store.dispatch(
+        "persistent/setFullHeader",
+        this.$route.meta?.fullHeader
+      );
+    }
   }
 }
 </script>

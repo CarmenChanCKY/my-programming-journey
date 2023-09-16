@@ -17,25 +17,28 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from "nuxt-property-decorator";
 import TitleList from "~/components/TitleList.vue";
 import type TitleListInterface from "~/interfaces/TitleListInterface";
 
-@Component({ components: { TitleList }, meta: { fullHeader: false } })
+@Component({
+  components: { TitleList },
+  async asyncData(context) {
+    try {
+      const categoriesGroup = await context.$axios.$get("/categories/all");
+
+      return {
+        categoryList: categoriesGroup.categoryList,
+        postList: categoriesGroup.postList,
+      };
+    } catch (e) {
+      //throw ({ statusCode: 404, message: "Post not found" });
+    }
+  },
+})
 export default class CategoryList extends Vue {
   categoryList: Array<any> = [];
   postList: Array<TitleListInterface> = [];
-
-  async fetch() {
-    try {
-      const categoriesGroup = await this.$axios.$get("/categories/all");
-
-      this.categoryList = categoriesGroup.categoryList;
-      this.postList = categoriesGroup.postList;
-    } catch (e) {
-      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
-    }
-  }
 
   scrollTo(el: string) {
     let element = document.getElementById(el);
@@ -45,8 +48,8 @@ export default class CategoryList extends Vue {
   }
 }
 </script>
-  
-  <style lang="scss" scoped>
+
+<style lang="scss" scoped>
 @import "~/assets/styles/global.scss";
 
 .category-container {
@@ -68,8 +71,4 @@ export default class CategoryList extends Vue {
     font-size: 0.889rem;
   }
 }
-
-.category-list-container {
-}
 </style>
-  

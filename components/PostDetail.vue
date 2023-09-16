@@ -107,7 +107,7 @@ export default class PostDetail extends Vue {
   rightIcon: string = mdiArrowRight;
   categoryIcon: string = mdiFolderOutline;
 
-  @Watch("content")
+  @Watch("content", { immediate: true })
   highlightPrism(val: string) {
     if (this.$validator.isValid(val)) {
       setTimeout(() => {

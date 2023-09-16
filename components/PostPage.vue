@@ -36,8 +36,8 @@
             name: routerName,
             params: {
               ...nextRouterParams,
-              pages: parseInt(currentPage.toString()) + 1,
-            },
+              pages: parseInt(currentPage.toString()) + 1
+            }
           }"
           :style="{ visibility: showNextBtn ? 'visible' : 'hidden' }"
         >
@@ -104,10 +104,11 @@ export default class PostPage extends Vue {
 
   @Watch("pageType", { immediate: true })
   updatePageType(val: string) {
-    // TODO: change router path
     switch (this.pageType) {
       case "post":
         this.routerName = "Home";
+        this.previousRouterParams = {};
+        this.nextRouterParams = {};
         break;
       case "category":
         this.routerName = "SearchCategoryResult";

@@ -45,6 +45,14 @@ const routes = [
     },
   },
   {
+    path: "/tags",
+    name: "TagList",
+    component: getComponent("TagList"),
+    meta: {
+      fullHeader: false,
+    },
+  },
+  {
     path: "/:pages?",
     name: "Home",
     component: getComponent("Home"),
