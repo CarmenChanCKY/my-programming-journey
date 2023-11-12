@@ -37,10 +37,16 @@ export default class TitleList extends Vue {
 
 .list-item {
   display: flex;
-  border-left: 1px solid var(--v-dividerBorderLine-base);
+  border-left: 2px solid var(--v-dividerBorderLine-base);
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
 
-  &:not(:last-child) {
-    padding-bottom: 15px;
+  &:hover {
+    border-left: 2px solid var(--v-primary-lighten2);
+
+    & > a {
+      color: var(--v-primary-lighten2);
+    }
   }
 
   & > .date {
@@ -52,18 +58,21 @@ export default class TitleList extends Vue {
 
   & > a {
     padding-left: 20px;
-    &:hover {
-      color: var(--v-primary-lighten2);
-    }
   }
 }
 
 @media screen and (max-width: 600px) {
   .list-item {
     flex-direction: column;
+    padding-top: 0;
+    border-left: none;
 
     &:not(:last-child) {
       padding-bottom: 25px;
+    }
+
+    &:hover{
+      border-left: none;
     }
   }
 }

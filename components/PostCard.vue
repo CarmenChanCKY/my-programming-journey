@@ -21,11 +21,17 @@
         <div>{{ postData.category }}</div>
       </NuxtLink>
     </div>
+
     <div class="post-tag-container">
       <v-icon>{{ tagIcon }}</v-icon>
-      <div v-for="tag of postData.tags" :key="tag.id" class="post-tag">
+      <NuxtLink
+        v-for="tag of postData.tags"
+        :key="tag.id"
+        class="post-tag"
+        :to="{ name: 'SearchTagResult', params: { keyword: tag.name } }"
+      >
         {{ tag.name }}
-      </div>
+      </NuxtLink>
     </div>
     <div class="post-preview">
       {{ postData.preview }}
@@ -49,7 +55,6 @@ export default class PostCard extends Vue {
   tagIcon: string = mdiTagOutline;
   dataIcon: string = mdiCalendar;
   categoryIcon: string = mdiFolderOutline;
-  // TODO: link for category and tags
 }
 </script>
 

@@ -34,7 +34,7 @@
       <NuxtLink :to="{ name: 'TagList' }">
         <div>Tags</div>
       </NuxtLink>
-      <NuxtLink to="/">
+      <NuxtLink :to="{ name: 'Archive' }">
         <div>Archive</div>
       </NuxtLink>
       <ChangeTheme></ChangeTheme>

@@ -4,7 +4,11 @@
 
     <div class="tags-list">
       <div v-for="tag in tagsList" :key="tag.id">
-        <a href="/"> {{ tag.name }} ({{ tag.post_count }}) </a>
+        <NuxtLink
+          :to="{ name: 'SearchTagResult', params: { keyword: tag.name } }"
+        >
+          {{ tag.name }} ({{ tag.post_count }})
+        </NuxtLink>
       </div>
     </div>
   </section>

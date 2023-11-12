@@ -100,7 +100,7 @@ export default {
           drawerBackground: "#333131",
           themeBtn: "#FFC107",
           borderLine: "#797979",
-          dividerBorderLine: "#e3e3e3",
+          dividerBorderLine: "#6a6a6a",
           blockquote: "#0087ff",
           inlineCodeText: "#ff8a8a",
           inlineCodeBackground: "#353535",

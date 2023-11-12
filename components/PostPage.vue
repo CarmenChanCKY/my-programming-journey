@@ -36,8 +36,8 @@
             name: routerName,
             params: {
               ...nextRouterParams,
-              pages: parseInt(currentPage.toString()) + 1
-            }
+              pages: parseInt(currentPage.toString()) + 1,
+            },
           }"
           :style="{ visibility: showNextBtn ? 'visible' : 'hidden' }"
         >
@@ -120,6 +120,10 @@ export default class PostPage extends Vue {
         this.previousRouterParams = { keyword: this.$route.params.keyword };
         this.nextRouterParams = { keyword: this.$route.params.keyword };
         break;
+      case "tags":
+        this.routerName = "SearchTagResult";
+        this.previousRouterParams = { keyword: this.$route.params.keyword };
+        this.nextRouterParams = { keyword: this.$route.params.keyword };
     }
   }
 }

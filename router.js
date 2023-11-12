@@ -45,9 +45,26 @@ const routes = [
     },
   },
   {
+    path: "/tags/search/:keyword/:pages?",
+    name: "SearchTagResult",
+    component: getComponent("SearchResult"),
+    meta: {
+      fullHeader: false,
+      source: "tags",
+    },
+  },
+  {
     path: "/tags",
     name: "TagList",
     component: getComponent("TagList"),
+    meta: {
+      fullHeader: false,
+    },
+  },
+  {
+    path: "/archive/:pages?",
+    name: "Archive",
+    component: getComponent("Archive"),
     meta: {
       fullHeader: false,
     },

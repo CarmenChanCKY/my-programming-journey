@@ -42,12 +42,17 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
         errorMessage = "Search not found";
       } else if (source === "category") {
         errorMessage = "Category not found";
+      } else if (source === "tags") {
+        errorMessage = "Tag not found";
       } else {
         context.error({ statusCode: 404, message: "Page Not Found" });
       }
 
-      if (this.$validator.isValid(keyword)) {
-        keyword = context.route.params.keyword.replaceAll("-", " ");
+      if (keyword !== undefined && keyword !== null && keyword !== "") {
+        keyword =
+          source === "tags"
+            ? context.route.params.keyword
+            : context.route.params.keyword.replaceAll("-", " ");
       } else {
         context.error({ statusCode: 404, message: errorMessage });
         return;
@@ -73,13 +78,23 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
         searchNotFoundText = `Category ${keyword} not found.`;
         key = "/categories/list";
         params = { ...params, category: keyword };
+      } else if (source === "tags") {
+        resultText = "Tag";
+        searchNotFoundText = `Tag ${keyword} not found.`;
+        key = "/tag/list";
+        params = { ...params, tag: keyword };
       }
 
       const postData: any = await context.$axios.$get(key, { params });
 
       const formatData: any = [];
 
-      if (this.$validator.isValid(postData.data)) {
+      if (
+        postData.data !== undefined &&
+        postData.data !== null &&
+        postData.data !== "" &&
+        Array.isArray(postData.data)
+      ) {
         for (let i = 0; i < postData.data.length; i++) {
           const data = {
             title: postData.data[i].title,
@@ -94,9 +109,16 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
           formatData.push(data);
         }
       }
+
       return {
         postData: formatData,
-        totalPost: this.$validator.isValid(postData.total) ? postData.total : 0,
+        totalPost:
+          postData.total !== undefined &&
+          postData.total !== null &&
+          postData.total !== "" &&
+          !isNaN(postData.total)
+            ? postData.total
+            : 0,
         currentPage: pages,
         searchNotFoundText,
         resultText,
@@ -113,75 +135,5 @@ export default class SearchResult extends Vue {
   totalPost: number = 0;
   searchNotFoundText: string = "";
   resultText: string = "";
-
-  /*  async fetch() {
-    try {
-      let keyword: string = "";
-      let pages: number = 1;
-
-      if (context.route.params.keyword !== undefined) {
-        keyword = context.route.params.keyword.replaceAll("-", " ");
-      } else {
-        this.$nuxt.error({ statusCode: 404, message: this.errorMessage });
-      }
-
-      if (context.route.params.pages !== undefined) {
-        if (isNaN(parseInt(context.route.params.pages))) {
-          this.$nuxt.error({ statusCode: 404, message: this.errorMessage });
-          return;
-        }
-
-        pages = parseInt(context.route.params.pages);
-      }
-
-      let key = "";
-      let params: any = { pages };
-      if (context.route.meta?.source === "search") {
-        key = "/explore/post";
-        params = { ...params, keyword };
-      } else if (context.route.meta?.source === "category") {
-        key = "/categories/list";
-        params = { ...params, category: keyword };
-      }
-
-      const postData = await this.$axios.$get(key, { params });
-
-      const formatData: any = [];
-
-      for (let i = 0; i < postData.data.length; i++) {
-        const data = {
-          title: postData.data[i].title,
-          date: postData.data[i].date,
-          slug: postData.data[i].slug,
-          category: postData.data[i].category_name,
-          category_id: postData.data[i].category_id,
-          tags: postData.data[i].tags_data,
-          preview: postData.data[i].content,
-        };
-
-        formatData.push(data);
-      }
-
-      this.postData = formatData;
-      this.totalPost = postData.total;
-      this.currentPage = pages;
-    } catch (e) {
-      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
-    }
-  } */
-
-  mounted() {
-    /*  const keyword = context.route.params.keyword.replaceAll("-", " ");
-
-    if (context.route.meta?.source === "search") {
-      this.resultText = "Search Result";
-      this.errorMessage = "Search not found";
-      this.searchNotFoundText = `Search result for ${keyword} not found.`;
-    } else if (context.route.meta?.source === "category") {
-      this.resultText = "Category";
-      this.errorMessage = "Category not found";
-      this.searchNotFoundText = `Category ${keyword} not found.`;
-    } */
-  }
 }
 </script>
