@@ -20,11 +20,8 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
       let pages: number = 1;
       if (context.route.params.pages !== undefined) {
         if (isNaN(parseInt(context.route.params.pages))) {
-          // TODO:
-          context.error({ statusCode: 404, message: "Post not found" });
+          context.error({ statusCode: 404, message: "Invalid Pages" });
           return;
-          /*  this.$nuxt.error({ statusCode: 404, message: "Post not found" });
-          return; */
         }
 
         pages = parseInt(context.route.params.pages);
@@ -33,6 +30,8 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
       const postData = await context.$axios.$get("/post/list", {
         params: { pages },
       });
+
+      console.log(postData);
 
       const formatData: any = [];
 
@@ -52,7 +51,7 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
 
       return { postData: formatData, totalPost: postData.total };
     } catch (e) {
-      //throw ({ statusCode: 404, message: "Post not found" });
+      console.log(e);
     }
   },
 })
@@ -60,44 +59,5 @@ export default class Home extends Vue {
   // data
   postData: Array<PostPageInterface> = [];
   totalPost: number = 0;
-
-  /*  async fetch() {
-    try {
-      let pages: number = 1;
-      if (this.$route.params.pages !== undefined) {
-        if (isNaN(parseInt(this.$route.params.pages))) {
-          this.$nuxt.error({ statusCode: 404, message: "Post not found" });
-          return;
-        }
-
-        pages = parseInt(this.$route.params.pages);
-      }
-
-      const postData = await this.$axios.$get("/post/list", {
-        params: { pages },
-      });
-
-      const formatData: any = [];
-
-      for (let i = 0; i < postData.data.length; i++) {
-        const data = {
-          title: postData.data[i].title,
-          date: postData.data[i].date,
-          slug: postData.data[i].slug,
-          category: postData.data[i].category_name,
-          category_id: postData.data[i].category_id,
-          tags: postData.data[i].tags_data,
-          preview: postData.data[i].content,
-        };
-
-        formatData.push(data);
-      }
-
-      this.postData = formatData;
-      this.totalPost = postData.total;
-    } catch (e) {
-      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
-    }
-  } */
 }
 </script>

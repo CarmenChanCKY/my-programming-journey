@@ -27,6 +27,8 @@ import type OtherPostInterface from "~/interfaces/OtherPostInterface";
         params: { slug },
       });
 
+      console.log(getPostDetail)
+
       const postData = {
         id: getPostDetail.id,
         slug: context.route.params.slug,

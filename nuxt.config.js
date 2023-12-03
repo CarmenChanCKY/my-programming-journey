@@ -1,7 +1,10 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - My Programming Journey",
+    titleTemplate: (titleChunk) => {
+      // If undefined or blank then we don't need the hyphen
+      return titleChunk ? `${titleChunk} - My Programming Journey` : 'My Programming Journey';
+    },
     title: "My Programming Journey",
     htmlAttrs: {
       lang: "en",
@@ -19,6 +22,9 @@ export default {
         href: "/my_programming_journey_favicon.png",
       },
     ],
+    noscript: [
+      { innerHTML: 'This website requires JavaScript. Please enable your browser\'s JavaScript.' }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -59,7 +65,7 @@ export default {
     customVariables: ["~/assets/styles/variables.scss"],
     theme: {
       options: {
-        customProperties: true
+        customProperties: true,
       },
       themes: {
         light: {
@@ -117,7 +123,15 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    terser: {
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        },
+      },
+    },
+  },
 
   router: {
     trailingSlash: true,

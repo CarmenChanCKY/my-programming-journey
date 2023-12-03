@@ -15,9 +15,7 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
   components: { TitleList },
   async asyncData(context) {
     try {
-      const archiveData = await context.$axios.$get("/post/archive", {
-        params: { pages: 9 },
-      });
+      const archiveData = await context.$axios.$get("/post/archive");
 
       const listItem = archiveData.data.map((obj: any) => {
         return {
