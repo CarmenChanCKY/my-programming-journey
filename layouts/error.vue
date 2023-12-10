@@ -63,6 +63,7 @@ export default {
 
     return {
       title,
+      meta: [{ hid: "og_url", name: "og:url", content: window.location.href }],
     };
   },
   created() {

@@ -26,12 +26,19 @@ import { Vue, Component } from "vue-property-decorator";
         tagsList: tags.data,
       };
     } catch (e) {
-      //throw ({ statusCode: 404, message: "Post not found" });
+      console.log(e);
     }
   },
 })
 export default class TagList extends Vue {
   tagsList: Array<Tags> = [];
+
+  head() {
+    return {
+      title: "Tags",
+      meta: [{ hid: "og_url", name: "og:url", content: window.location.href }],
+    };
+  }
 }
 
 interface Tags {

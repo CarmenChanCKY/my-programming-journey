@@ -32,13 +32,20 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
         postList: categoriesGroup.postList,
       };
     } catch (e) {
-      //throw ({ statusCode: 404, message: "Post not found" });
+      console.log(e);
     }
   },
 })
 export default class CategoryList extends Vue {
   categoryList: Array<any> = [];
   postList: Array<TitleListInterface> = [];
+
+  head() {
+    return {
+      title: "Category",
+      meta: [{ hid: "og_url", name: "og:url", content: window.location.href }],
+    };
+  }
 
   scrollTo(el: string) {
     let element = document.getElementById(el);

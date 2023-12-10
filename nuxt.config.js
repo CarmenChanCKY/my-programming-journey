@@ -2,18 +2,22 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: (titleChunk) => {
-      // If undefined or blank then we don't need the hyphen
-      return titleChunk ? `${titleChunk} - My Programming Journey` : 'My Programming Journey';
+      return titleChunk ? `${titleChunk} | My Programming Journey` : 'My Programming Journey';
     },
-    title: "My Programming Journey",
     htmlAttrs: {
       lang: "en",
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { hid: "keyword", name: "keyword", content: "My Programming Journey, Programming Journey, CarmenChanCKY, Carmen Chan, Programming Blog" },
+      { hid: "description", name: "description", content: "Learn from my past experience and faults." },
       { name: "format-detection", content: "telephone=no" },
+      { hid: "og_type", name: "og:type", content: "website" },
+      { hid: "og_title", name: "og:title", content: "My Programming Journey" },
+      { hid: "og_site_name", name: "og:site_name", content: "My Programming Journey" },
+      { hid: "og_locale", name: "og:locale", content: "en" },
+
     ],
     link: [
       {

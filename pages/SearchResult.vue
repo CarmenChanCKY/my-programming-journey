@@ -124,7 +124,7 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
         resultText,
       };
     } catch (e) {
-      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
+      console.log(e);
     }
   },
 })
@@ -135,5 +135,15 @@ export default class SearchResult extends Vue {
   totalPost: number = 0;
   searchNotFoundText: string = "";
   resultText: string = "";
+
+  head() {
+    return {
+      title: `${this.resultText} - ${this.$route.params.keyword.replaceAll(
+        "-",
+        " "
+      )}`,
+      meta: [{ hid: "og_url", name: "og:url", content: window.location.href }],
+    };
+  }
 }
 </script>

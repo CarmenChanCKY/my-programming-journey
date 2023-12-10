@@ -59,5 +59,11 @@ export default class Home extends Vue {
   // data
   postData: Array<PostPageInterface> = [];
   totalPost: number = 0;
+
+  head() {
+    return {
+      meta: [{ hid: "og_url", name: "og:url", content: window.location.href }],
+    };
+  }
 }
 </script>

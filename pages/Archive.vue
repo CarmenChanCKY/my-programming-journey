@@ -36,6 +36,13 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
 export default class CategoryList extends Vue {
   postList: Array<TitleListInterface> = [];
   archiveTotal: number = 0;
+
+  head() {
+    return {
+      title: "Archive",
+      meta: [{ hid: "og_url", name: "og:url", content: window.location.href }],
+    };
+  }
 }
 </script>
 

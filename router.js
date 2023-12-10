@@ -1,4 +1,3 @@
-import goTo from "vuetify/lib/services/goto";
 import Vue from "vue";
 import Router from "vue-router";
 

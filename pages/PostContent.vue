@@ -27,7 +27,7 @@ import type OtherPostInterface from "~/interfaces/OtherPostInterface";
         params: { slug },
       });
 
-      console.log(getPostDetail)
+      console.log(getPostDetail);
 
       const postData = {
         id: getPostDetail.id,
@@ -43,6 +43,14 @@ import type OtherPostInterface from "~/interfaces/OtherPostInterface";
             ? getPostDetail.reference_array
             : [],
       };
+
+      const metaKeyword = getPostDetail.meta_keyword;
+      const metaDescription =
+        getPostDetail.meta_description !== undefined &&
+        getPostDetail.meta_description !== null &&
+        getPostDetail.meta_description !== ""
+          ? getPostDetail.meta_description
+          : "";
 
       const content = getPostDetail.content;
 
@@ -66,9 +74,16 @@ import type OtherPostInterface from "~/interfaces/OtherPostInterface";
         nextPost = getNextPost;
       }
 
-      return { postData, content, previousPost, nextPost };
+      return {
+        postData,
+        content,
+        previousPost,
+        nextPost,
+        metaKeyword,
+        metaDescription,
+      };
     } catch (e) {
-      //this.$nuxt.error({ statusCode: 404, message: "Post not found" });
+      console.log(e);
     }
   },
 })
@@ -87,6 +102,32 @@ export default class PostContent extends Vue {
   previousPost: OtherPostInterface | null = null;
   nextPost: OtherPostInterface | null = null;
   content: string = "";
+  metaKeyword: string = "";
+  metaDescription = "";
 
+  head() {
+    const meta = [
+      { hid: "og_url", name: "og:url", content: window.location.href },
+      { hid: "keyword", name: "keyword", content: this.metaKeyword },
+    ];
+
+    if (this.$validator.isValid(this.metaDescription)) {
+      meta.push({
+        hid: "description",
+        name: "description",
+        content: this.metaDescription,
+      });
+      meta.push({
+        hid: "og_description",
+        name: "og:description",
+        content: this.metaDescription,
+      });
+    }
+
+    return {
+      title: this.postData.title,
+      meta,
+    };
+  }
 }
 </script>
