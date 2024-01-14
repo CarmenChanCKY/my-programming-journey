@@ -17,15 +17,7 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
   },
   async asyncData(context) {
     try {
-      let pages: number = 1;
-      if (context.route.params.pages !== undefined) {
-        if (isNaN(parseInt(context.route.params.pages))) {
-          context.error({ statusCode: 404, message: "Invalid Pages" });
-          return;
-        }
-
-        pages = parseInt(context.route.params.pages);
-      }
+      let pages: any = context.route.params.pages;
 
       const postData = await context.$axios.$get("/post/list", {
         params: { pages },
@@ -50,9 +42,7 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
       }
 
       return { postData: formatData, totalPost: postData.total };
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e: any) {}
   },
 })
 export default class Home extends Vue {

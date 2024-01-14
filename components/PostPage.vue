@@ -1,53 +1,60 @@
 <template>
   <div>
-    <section class="post-card-container">
-      <PostCard
-        v-for="(data, index) of postData"
-        :key="index"
-        :post-data="data"
-        :postRouter="{
-          name: 'PostDetail',
-          params: { slug: data.slug },
-        }"
-      ></PostCard>
-    </section>
-    <section class="pagination-container" v-if="!isNaN(currentPage)">
-      <div>
-        <NuxtLink
-          class="prev-btn"
-          :to="{
-            name: routerName,
-            params: {
-              ...previousRouterParams,
-              pages: parseInt(currentPage.toString()) - 1,
-            },
+    <template v-if="totalPost > 0">
+      <section class="post-card-container">
+        <PostCard
+          v-for="(data, index) of postData"
+          :key="index"
+          :post-data="data"
+          :postRouter="{
+            name: 'PostDetail',
+            params: { slug: data.slug },
           }"
-          :style="{ visibility: showPreviousBtn ? 'visible' : 'hidden' }"
-        >
-          <div class="pagination">
-            <v-icon>{{ leftIcon }}</v-icon>
-            Previous
-          </div>
-        </NuxtLink>
-        <div class="current-pages">{{ currentPage }} / {{ totalPage }}</div>
-        <NuxtLink
-          class="next-btn"
-          :to="{
-            name: routerName,
-            params: {
-              ...nextRouterParams,
-              pages: parseInt(currentPage.toString()) + 1,
-            },
-          }"
-          :style="{ visibility: showNextBtn ? 'visible' : 'hidden' }"
-        >
-          <div class="pagination">
-            Next
-            <v-icon>{{ rightIcon }}</v-icon>
-          </div>
-        </NuxtLink>
+        ></PostCard>
+      </section>
+      <section class="pagination-container" v-if="!isNaN(currentPage)">
+        <div>
+          <NuxtLink
+            class="prev-btn"
+            :to="{
+              name: routerName,
+              params: {
+                ...previousRouterParams,
+                pages: parseInt(currentPage.toString()) - 1,
+              },
+            }"
+            :style="{ visibility: showPreviousBtn ? 'visible' : 'hidden' }"
+          >
+            <div class="pagination">
+              <v-icon>{{ leftIcon }}</v-icon>
+              Previous
+            </div>
+          </NuxtLink>
+          <div class="current-pages">{{ currentPage }} / {{ totalPage }}</div>
+          <NuxtLink
+            class="next-btn"
+            :to="{
+              name: routerName,
+              params: {
+                ...nextRouterParams,
+                pages: parseInt(currentPage.toString()) + 1,
+              },
+            }"
+            :style="{ visibility: showNextBtn ? 'visible' : 'hidden' }"
+          >
+            <div class="pagination">
+              Next
+              <v-icon>{{ rightIcon }}</v-icon>
+            </div>
+          </NuxtLink>
+        </div>
+      </section>
+    </template>
+    <template v-else>
+      <div class="not-found-container">
+        <div>Post not Found</div>
       </div>
-    </section>
+    </template>
   </div>
 </template>
 
@@ -133,7 +140,8 @@ export default class PostPage extends Vue {
 @import "~/assets/styles/global.scss";
 
 .post-card-container,
-.pagination-container {
+.pagination-container,
+.not-found-container {
   @extend %center-div;
 }
 
@@ -163,5 +171,18 @@ export default class PostPage extends Vue {
 
 .current-pages {
   color: var(--v-secondary-base);
+}
+
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  & > div {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: var(--v-searchResultText-base);
+  }
 }
 </style>

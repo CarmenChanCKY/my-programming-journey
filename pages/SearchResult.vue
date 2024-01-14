@@ -123,9 +123,7 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
         searchNotFoundText,
         resultText,
       };
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   },
 })
 export default class SearchResult extends Vue {

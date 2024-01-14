@@ -1,5 +1,10 @@
 <template>
-  <svg class="website-logo" version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1170 244">
+  <svg
+    class="website-logo"
+    version="1.2"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1170 244"
+  >
     <title>my programming journey logo</title>
     <defs>
       <image
@@ -34,10 +39,10 @@ export default class Logo extends Vue {}
 
 <style lang="scss" scoped>
 .website-logo {
-        width: 100%;
-        object-fit: contain;
-        object-position: center;
-      }
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
 
 .s0 {
   fill: var(--v-primary-base);

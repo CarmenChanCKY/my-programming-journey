@@ -28,9 +28,7 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
         postList: listItem,
         archiveTotal: archiveData.total,
       };
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   },
 })
 export default class CategoryList extends Vue {

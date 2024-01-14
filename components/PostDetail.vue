@@ -22,13 +22,17 @@
       </div>
       <div class="post-tag-container">
         <v-icon>{{ tagIcon }}</v-icon>
-        <div
+        <NuxtLink
           v-for="(tag, index) of postData.tags"
           :key="index"
           class="post-tag"
+          :to="{
+            name: 'SearchTagResult',
+            params: { keyword: tag.name },
+          }"
         >
           {{ tag.name }}
-        </div>
+        </NuxtLink>
       </div>
     </section>
 

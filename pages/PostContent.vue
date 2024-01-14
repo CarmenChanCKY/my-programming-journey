@@ -82,9 +82,7 @@ import type OtherPostInterface from "~/interfaces/OtherPostInterface";
         metaKeyword,
         metaDescription,
       };
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e: any) {}
   },
 })
 export default class PostContent extends Vue {

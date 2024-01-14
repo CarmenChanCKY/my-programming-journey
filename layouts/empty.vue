@@ -10,7 +10,7 @@
     </client-only>
   </transition-group>
 </template>
-  
+
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
 import LoadingBar from "~/components/LoadingBar.vue";

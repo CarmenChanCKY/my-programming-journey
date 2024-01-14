@@ -25,9 +25,7 @@ import { Vue, Component } from "vue-property-decorator";
       return {
         tagsList: tags.data,
       };
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   },
 })
 export default class TagList extends Vue {

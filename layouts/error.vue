@@ -1,7 +1,7 @@
 <template>
   <v-container fluid style="height: 100%">
     <div class="error-container">
-      <div v-if="errorCodeFound" class="error-code-container">
+      <div v-if="!showFullMessage" class="error-code-container">
         <span class="error-code">
           {{ mainMessage }}
         </span>
@@ -14,79 +14,63 @@
         <div class="main-message">{{ mainMessage }}</div>
         <div class="sub-message">{{ subMessage }}</div>
       </div>
-      <v-btn class="mt-10" nuxt color="primary" outlined :to="'/'">
-        Back to Home
+      <v-btn class="mt-10" nuxt color="primary" outlined @click="redirectRoute">
+        Home
       </v-btn>
     </div>
   </v-container>
 </template>
 
-<script>
-export default {
-  name: "EmptyLayout",
-  layout: "empty",
-  props: {
-    error: {
-      type: Object,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      errorMessage: [
-        {
-          code: [404],
-          message: "Not Found",
-        },
-        {
-          code: [500, 502],
-          message: "Server Error",
-        },
-      ],
-      errorCodeFound: false,
-      mainMessage: "",
-      subMessage: "",
-    };
-  },
+<script lang="ts">
+import { Vue, Component, Prop } from "vue-property-decorator";
+
+@Component({ layout: "empty" })
+export default class Error extends Vue {
+  @Prop({ type: Object, required: true }) error!: {
+    statusCode: number;
+    name: string;
+    message: string;
+  };
+
   head() {
-    let index = this.errorMessage.findIndex((obj) => {
-      return obj.code.includes(this.error.statusCode);
-    });
-
-    let title = "";
-
-    if (index !== -1) {
-      title = `${this.error.statusCode} ${this.errorMessage[index].message}`;
-    } else {
-      title = "Error occurred";
-    }
+    let title = this.error.name;
 
     return {
       title,
       meta: [{ hid: "og_url", name: "og:url", content: window.location.href }],
     };
-  },
-  created() {
-    const statusCode = parseInt(this.error.statusCode);
+  }
 
-    let index = this.errorMessage.findIndex((obj) => {
-      return obj.code.includes(statusCode);
-    });
+  mainMessage: string = "";
+  subMessage: string = "";
+  showFullMessage: boolean = false;
 
-    if (index !== -1) {
-      this.errorCodeFound = true;
-      this.mainMessage = statusCode;
-      this.subMessage = this.errorMessage[index].message;
+  redirectRoute() {
+    if (this.$route.name === "Home") {
+      this.$router.go(0);
     } else {
-      this.errorCodeFound = false;
-      this.mainMessage = "Oops...";
-      this.subMessage = "Some error occurred. Please try again.";
+      this.$router.replace({ name: "Home" });
     }
-  },
-};
+  }
+
+  created() {
+    console.log(this.error);
+    const statusCode = parseInt(this.error.statusCode.toString());
+
+    this.showFullMessage = false;
+    this.mainMessage = this.error.statusCode.toString();
+    this.subMessage = this.error.name;
+
+    if (statusCode === 429) {
+      this.mainMessage = this.error.name;
+      this.subMessage = this.error.message;
+      this.showFullMessage = true;
+    }
+  }
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .error-container {
   display: flex;
   flex-direction: column;
@@ -98,29 +82,31 @@ export default {
 .error-code-container {
   display: flex;
   align-items: center;
+
+  & > .error-code,
+  & > .error-message {
+    font-size: 1.625rem;
+  }
+
+  & > .divider {
+    font-size: 1.625rem;
+    width: 35px;
+    text-align: center;
+  }
 }
 
-.error-code-container > .error-code,
-.error-code-container > .error-message {
-  font-size: 1.625rem;
-}
+.error-message-container {
+  & > div {
+    text-align: center;
+    line-height: 2;
+  }
 
-.error-code-container > .divider {
-  font-size: 1.625rem;
-  width: 35px;
-  text-align: center;
-}
+  & > .main-message {
+    font-size: 1.75rem;
+  }
 
-.error-message-container > div {
-  text-align: center;
-  line-height: 2;
-}
-
-.error-message-container > .main-message {
-  font-size: 1.75rem;
-}
-
-.error-message-container > .sub-message {
-  font-size: 1.25rem;
+  & > .sub-message {
+    font-size: 1.25rem;
+  }
 }
 </style>

@@ -27,13 +27,20 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
     try {
       const categoriesGroup = await context.$axios.$get("/categories/all");
 
+      const categoryListExists =
+        categoriesGroup.categoryList !== undefined &&
+        categoriesGroup.categoryList !== null &&
+        Array.isArray(categoriesGroup.categoryList);
+      const postListExists =
+        categoriesGroup.postList !== undefined &&
+        categoriesGroup.postList !== null &&
+        Array.isArray(categoriesGroup.postList);
+
       return {
-        categoryList: categoriesGroup.categoryList,
-        postList: categoriesGroup.postList,
+        categoryList: categoryListExists ? categoriesGroup.categoryList : [],
+        postList: postListExists ? categoriesGroup.postList : [],
       };
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   },
 })
 export default class CategoryList extends Vue {
