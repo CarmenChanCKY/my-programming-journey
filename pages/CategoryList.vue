@@ -2,17 +2,24 @@
   <section class="category-container">
     <div class="page-title">Category</div>
 
-    <section class="category-group-container">
-      <a
-        v-for="(category, index) in categoryList"
-        :key="index"
-        @click="scrollTo(category.category_name)"
-      >
-        {{ category.category_name }} ({{ category.post_count }})
-      </a>
-    </section>
+    <template
+      v-if="$validator.isValid(categoryList) && $validator.isValid(postList)"
+    >
+      <section class="category-group-container">
+        <a
+          v-for="(category, index) in categoryList"
+          :key="index"
+          @click="scrollTo(category.category_name)"
+        >
+          {{ category.category_name }} ({{ category.post_count }})
+        </a>
+      </section>
 
-    <TitleList :ListItem="postList"></TitleList>
+      <TitleList :ListItem="postList"></TitleList>
+    </template>
+    <div class="not-found-container" v-else>
+      <div>Category not Found</div>
+    </div>
   </section>
 </template>
 
@@ -24,7 +31,7 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
 @Component({
   components: { TitleList },
   async asyncData(context) {
-    try {
+    /* try {
       const categoriesGroup = await context.$axios.$get("/categories/all");
 
       const categoryListExists =
@@ -40,7 +47,7 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
         categoryList: categoryListExists ? categoriesGroup.categoryList : [],
         postList: postListExists ? categoriesGroup.postList : [],
       };
-    } catch (e) {}
+    } catch (e) {} */
   },
 })
 export default class CategoryList extends Vue {

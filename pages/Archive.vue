@@ -2,7 +2,14 @@
   <section class="archive-container">
     <div class="page-title">Archive</div>
 
-    <TitleList :ListItem="postList"></TitleList>
+    <TitleList
+      :ListItem="postList"
+      v-if="$validator.isValid(postList)"
+    ></TitleList>
+
+    <div class="not-found-container" v-else>
+      <div>Archive not Found</div>
+    </div>
   </section>
 </template>
 

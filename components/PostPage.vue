@@ -50,11 +50,10 @@
         </div>
       </section>
     </template>
-    <template v-else>
-      <div class="not-found-container">
-        <div>Post not Found</div>
-      </div>
-    </template>
+
+    <div class="not-found-container" v-else>
+      <div>Post not Found</div>
+    </div>
   </div>
 </template>
 
@@ -140,8 +139,7 @@ export default class PostPage extends Vue {
 @import "~/assets/styles/global.scss";
 
 .post-card-container,
-.pagination-container,
-.not-found-container {
+.pagination-container {
   @extend %center-div;
 }
 
@@ -171,18 +169,5 @@ export default class PostPage extends Vue {
 
 .current-pages {
   color: var(--v-secondary-base);
-}
-
-.not-found-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
-
-  & > div {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: var(--v-searchResultText-base);
-  }
 }
 </style>

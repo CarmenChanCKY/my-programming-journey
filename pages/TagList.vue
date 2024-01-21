@@ -1,15 +1,19 @@
 <template>
   <section class="tags-container">
     <div class="page-title">Tags</div>
-
-    <div class="tags-list">
-      <div v-for="tag in tagsList" :key="tag.id">
-        <NuxtLink
-          :to="{ name: 'SearchTagResult', params: { keyword: tag.name } }"
-        >
-          {{ tag.name }} ({{ tag.post_count }})
-        </NuxtLink>
+    <template v-if="$validator.isValid(tagsList)">
+      <div class="tags-list">
+        <div v-for="tag in tagsList" :key="tag.id">
+          <NuxtLink
+            :to="{ name: 'SearchTagResult', params: { keyword: tag.name } }"
+          >
+            {{ tag.name }} ({{ tag.post_count }})
+          </NuxtLink>
+        </div>
       </div>
+    </template>
+    <div class="not-found-container" v-else>
+      <div>Tags not Found</div>
     </div>
   </section>
 </template>
