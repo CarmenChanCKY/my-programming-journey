@@ -31,7 +31,7 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
 @Component({
   components: { TitleList },
   async asyncData(context) {
-    /* try {
+     try {
       const categoriesGroup = await context.$axios.$get("/categories/all");
 
       const categoryListExists =
@@ -47,7 +47,7 @@ import type TitleListInterface from "~/interfaces/TitleListInterface";
         categoryList: categoryListExists ? categoriesGroup.categoryList : [],
         postList: postListExists ? categoriesGroup.postList : [],
       };
-    } catch (e) {} */
+    } catch (e) {} 
   },
 })
 export default class CategoryList extends Vue {
