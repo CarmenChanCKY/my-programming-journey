@@ -23,8 +23,6 @@ import PostPageInterface from "~/interfaces/PostPageInterface";
         params: { pages },
       });
 
-      console.log(postData);
-
       const formatData: any = [];
 
       for (let i = 0; i < postData.data.length; i++) {

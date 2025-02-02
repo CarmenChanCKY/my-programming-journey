@@ -54,7 +54,6 @@ export default class Error extends Vue {
   }
 
   created() {
-    console.log(this.error);
     const statusCode = parseInt(this.error.statusCode.toString());
 
     this.showFullMessage = false;

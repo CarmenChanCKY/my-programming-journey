@@ -4,8 +4,6 @@ export default function ({ app, $axios }) {
   $axios.onError((err) => {
     const error = { ...err };
 
-    console.log(error);
-
     app.context.error({
       statusCode: error.response.status,
       name: error.response.data.name,
