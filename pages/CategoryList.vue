@@ -88,7 +88,7 @@ export default class CategoryList extends Vue {
     padding-right: 10px;
     border-radius: 5px;
     background-color: var(--v-categoryChip-base);
-    color: var(--v-secondary-base);
+    color: var(--v-accent-base);
     font-size: 0.889rem;
   }
 }

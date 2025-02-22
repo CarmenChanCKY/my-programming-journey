@@ -25,7 +25,6 @@ export default class LoadingBar extends Vue {}
   left: 0;
   width: 100%;
   height: 100%;
-  /*   background-color: var(--v-background-base); */
 }
 
 .spinner-container {
@@ -39,7 +38,7 @@ export default class LoadingBar extends Vue {}
 
 html.dark-mode {
   .loading-container {
-    background-color: #2b2929;
+    background-color: #232023;
   }
 
   .v-progress-circular {
@@ -49,7 +48,7 @@ html.dark-mode {
 
 html.light-mode {
   .loading-container {
-    background-color: #f7f7f7;
+    background-color: #f2f3f4;
   }
 
   .v-progress-circular {

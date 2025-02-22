@@ -168,6 +168,6 @@ export default class PostPage extends Vue {
 }
 
 .current-pages {
-  color: var(--v-secondary-base);
+  color: var(--v-accent-base);
 }
 </style>

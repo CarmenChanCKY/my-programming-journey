@@ -92,7 +92,7 @@ export default class PostCard extends Vue {
   overflow: hidden;
   text-align: justify;
   word-break: break-all;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
 }
 
 .v-icon {

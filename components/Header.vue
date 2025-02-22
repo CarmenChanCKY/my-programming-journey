@@ -4,7 +4,9 @@
       <div v-if="headerClass === 'full'" class="website-title">
         My Programming Journey
       </div>
-      <Logo v-else></Logo>
+      <div v-else class="simple-website-title">
+        My Programming <span>Journey</span>
+      </div>
     </NuxtLink>
 
     <div
@@ -92,6 +94,15 @@ export default class Header extends Vue {
 <style lang="scss" scoped>
 @import "~/assets/styles/global.scss";
 
+%disable-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 header {
   &.full {
     display: flex;
@@ -101,10 +112,12 @@ header {
 
     .website-title {
       @extend %main-title-font;
+      @extend %disable-select;
       font-size: 2.667rem;
       margin-bottom: 20px;
       font-weight: bold;
       color: var(--v-colorText-base);
+      text-align: center;
     }
 
     .nav-link {
@@ -137,12 +150,25 @@ header {
     display: flex;
     align-items: center;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     justify-content: space-between;
 
-    .main-title-link {
-      width: 70%;
-      max-width: 300px;
+    .simple-website-title {
+      @extend %main-title-font;
+      @extend %disable-select;
+      position: relative;
+      font-size: 1.778rem;
+      letter-spacing: 0.8px;
+      font-weight: bold;
+      color: var(--v-primary-base);
+
+      & > span {
+        @extend %main-title-font;
+        position: absolute;
+        font-size: 1.556rem;
+        top: 32px;
+        right: 24px;
+      }
     }
 
     .nav-link {

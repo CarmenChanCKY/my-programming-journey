@@ -66,10 +66,10 @@ interface Tags {
     line-height: 2.3;
 
     &:hover {
-      border-left: 2px solid var(--v-primary-lighten2);
+      border-left: 2px solid var(--v-primaryHover-base);
 
       & > a {
-        color: var(--v-primary-lighten2);
+        color: var(--v-primaryHover-base);
       }
     }
   }

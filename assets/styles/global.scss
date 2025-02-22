@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Karla&family=Quantico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Karla&family=Tektur&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 
 :root {
@@ -55,7 +55,7 @@ p {
 }
 
 %main-title-font {
-  font-family: "Quantico", sans-serif;
+  font-family: "Tektur", sans-serif;
 }
 
 %heading-font {
@@ -91,9 +91,9 @@ p {
 }
 
 %button {
-  color: var(--v-secondary-base);
+  color: var(--v-accent-base);
   & .v-icon {
-    color: var(--v-secondary-base);
+    color: var(--v-accent-base);
   }
 }
 
@@ -166,7 +166,7 @@ p {
   flex-wrap: wrap;
 
   & .v-icon {
-    color: var(--v-secondary-base);
+    color: var(--v-accent-base);
   }
 
   & > .post-tag {

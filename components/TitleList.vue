@@ -42,10 +42,10 @@ export default class TitleList extends Vue {
   padding-bottom: 7.5px;
 
   &:hover {
-    border-left: 2px solid var(--v-primary-lighten2);
+    border-left: 2px solid var(--v-primaryHover-base);
 
     & > a {
-      color: var(--v-primary-lighten2);
+      color: var(--v-primaryHover-base);
     }
   }
 

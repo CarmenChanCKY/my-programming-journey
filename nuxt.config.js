@@ -2,7 +2,9 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: (titleChunk) => {
-      return titleChunk ? `${titleChunk} | My Programming Journey` : 'My Programming Journey';
+      return titleChunk
+        ? `${titleChunk} | My Programming Journey`
+        : "My Programming Journey";
     },
     htmlAttrs: {
       lang: "en",
@@ -10,14 +12,26 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "keyword", name: "keyword", content: "My Programming Journey, Programming Journey, CarmenChanCKY, Carmen Chan, Programming Blog" },
-      { hid: "description", name: "description", content: "Learn from my past experience and faults." },
+      {
+        hid: "keyword",
+        name: "keyword",
+        content:
+          "My Programming Journey, Programming Journey, CarmenChanCKY, Carmen Chan, Programming Blog",
+      },
+      {
+        hid: "description",
+        name: "description",
+        content: "Learn from my past experience and faults.",
+      },
       { name: "format-detection", content: "telephone=no" },
       { hid: "og_type", name: "og:type", content: "website" },
       { hid: "og_title", name: "og:title", content: "My Programming Journey" },
-      { hid: "og_site_name", name: "og:site_name", content: "My Programming Journey" },
+      {
+        hid: "og_site_name",
+        name: "og:site_name",
+        content: "My Programming Journey",
+      },
       { hid: "og_locale", name: "og:locale", content: "en" },
-
     ],
     link: [
       {
@@ -27,8 +41,11 @@ export default {
       },
     ],
     noscript: [
-      { innerHTML: 'This website requires JavaScript. Please enable your browser\'s JavaScript.' }
-    ]
+      {
+        innerHTML:
+          "This website requires JavaScript. Please enable your browser's JavaScript.",
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -70,19 +87,16 @@ export default {
     theme: {
       options: {
         customProperties: true,
+        variations: false,
       },
       themes: {
         light: {
           primary: "#007095",
-          secondary: "#757575",
-          accent: "#389BCC",
-          error: "#FF5252",
-          info: "#007095",
-          success: "#4CAF50",
-          warning: "#FFC107",
-          colorText: "#2E2C2F",
-          background: "#f7f7f7",
-          drawerBackground: "#f7f7f7",
+          primaryHover: "#54a4cb",
+          accent: "#757575",
+          colorText: "#232023",
+          background: "#f2f2f2",
+          drawerBackground: "#f2f2f2",
           themeBtn: "#FF6C00",
           borderLine: "#cacaca",
           dividerBorderLine: "#e3e3e3",
@@ -99,14 +113,10 @@ export default {
         },
         dark: {
           primary: "#6cbfe8",
-          secondary: "#b9b9b9",
-          accent: "#2A8BBB",
-          error: "#FF5252",
-          info: "#2196F3",
-          success: "#4CAF50",
-          warning: "#FFC107",
+          primaryHover: "#a7f7ff",
+          accent: "#b9b9b9",
           colorText: "#DBDBDB",
-          background: "#2b2929",
+          background: "#232023",
           drawerBackground: "#333131",
           themeBtn: "#FFC107",
           borderLine: "#797979",
