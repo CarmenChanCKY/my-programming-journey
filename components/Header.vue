@@ -282,4 +282,34 @@ header {
     }
   }
 }
+
+@media screen and (max-width: 400px) {
+  header {
+    &.simple {
+      flex-direction: column-reverse;
+      row-gap: 20px;
+      margin-bottom: 10px !important;
+
+      & .hamburger {
+        align-self: flex-end;
+      }
+
+      & .main-title-link {
+        max-width: 90%;
+
+        .simple-website-title {
+          font-size: 1.333rem;
+          text-align: center;
+
+          & > span {
+            position: relative;
+            top: 0;
+            right: 0;
+            font-size: 1.333rem;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

@@ -14,7 +14,7 @@
         <div class="main-message">{{ mainMessage }}</div>
         <div class="sub-message">{{ subMessage }}</div>
       </div>
-      <v-btn class="mt-10" nuxt color="primary" outlined @click="redirectRoute">
+      <v-btn class="mt-10" color="primary" outlined @click="redirectRoute">
         Home
       </v-btn>
     </div>
@@ -42,23 +42,21 @@ export default class Error extends Vue {
   }
 
   mainMessage: string = "";
-  subMessage: string = "";
+  subMessage: string = "Not Found";
   showFullMessage: boolean = false;
 
   redirectRoute() {
-    if (this.$route.name === "Home") {
-      this.$router.go(0);
-    } else {
-      this.$router.replace({ name: "Home" });
-    }
+    this.$router.replace({ name: "Home" });
   }
 
   created() {
     const statusCode = parseInt(this.error.statusCode.toString());
-
     this.showFullMessage = false;
     this.mainMessage = this.error.statusCode.toString();
-    this.subMessage = this.error.name;
+
+    if (this.$validator.isValid(this.error.name)) {
+      this.subMessage = this.error.name;
+    }
 
     if (statusCode === 429) {
       this.mainMessage = this.error.name;
