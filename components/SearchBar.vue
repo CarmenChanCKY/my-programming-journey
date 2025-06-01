@@ -81,7 +81,11 @@ export default class SearchBar extends Vue {
   border: 1px solid var(--v-textfieldBorder-base);
 }
 
-.search-btn-container {
-  width: 100%;
+header {
+  &.simple {
+    .search-btn-container {
+      width: 100%;
+    }
+  }
 }
 </style>
