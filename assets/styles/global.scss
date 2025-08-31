@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Karla&family=Tektur&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
+:root {
+  --source-code-pro: "Source Code Pro", monospace !important;
+  --content-width: 800px;
+  --text-size: 18px;
+  --post-title-size: 26px;
+}
+
+$breakpoint-md: 799.9px;
+$breakpoint-sm: 599.9px;
+$breakpoint-xs: 499.9px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+}
+
+html {
+  background: rgb(var(--v-theme-background)) !important;
+}
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+  font-size: var(--text-size) !important;
+}
+
+html.dark-mode {
+  color-scheme: dark;
+}
+
+html.light-mode {
+  color-scheme: light;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: rgb(var(--v-theme-primary));
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.v-application {
+  color: rgb(var(--v-theme-colorText)) !important;
+  -webkit-transition: background 0.3s ease-out;
+  -moz-transition: background 0.3s ease-out;
+  -ms-transition: background 0.3s ease-out;
+  -o-transition: background 0.3s ease-out;
+  transition: background 0.3s ease-out;
+}
+
+.blog-main-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & > *:not(header, footer) {
+    flex-grow: 1;
+  }
+}
+
+%main-title-font {
+  font-family: "Tektur", sans-serif;
+}
+
+%heading-font {
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+%link {
+  display: block;
+  content: "";
+  transform: scaleX(0);
+  border-bottom: 2px solid rgb(var(--v-theme-primary));
+  transition: transform 200ms ease-in-out;
+}
+
+%link-hover-animation {
+  transform: scaleX(1);
+}
+
+%post-card-tag {
+  border: 1px solid rgb(var(--v-theme-primary));
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-right: 12px;
+  font-size: 0.667rem;
+  color: rgb(var(--v-theme-primary));
+}
+
+%post-card-tag-hover {
+  color: rgb(var(--v-theme-background));
+  background-color: rgb(var(--v-theme-primary));
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+%button {
+  color: rgb(var(--v-theme-accent));
+  & .v-icon {
+    color: rgb(var(--v-theme-accent));
+  }
+}
+
+%button-hover {
+  cursor: pointer;
+  color: rgb(var(--v-theme-primary));
+  transition: 0.3s;
+}
+
+%post-title {
+  @extend %heading-font;
+  color: rgb(var(--v-theme-primary));
+  font-weight: bold;
+  font-size: var(--post-title-size);
+  text-align: justify;
+}
+
+%post-info {
+  display: flex;
+  margin-bottom: 10px;
+
+  & > div {
+    font-size: 0.889rem;
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+}
+
+%center-div {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.page-title {
+  @extend %heading-font;
+  font-size: 1.222rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.post-info {
+  @extend %post-info;
+}
+
+.post-date {
+  @extend %button;
+}
+
+.post-category {
+  @extend %button;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    @extend %button-hover;
+
+    & .v-icon {
+      color: rgb(var(--v-theme-primary));
+    }
+  }
+}
+
+.post-tag-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  & .v-icon {
+    color: rgb(var(--v-theme-accent));
+  }
+
+  & > .post-tag {
+    @extend %post-card-tag;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    &:hover {
+      @extend %post-card-tag-hover;
+    }
+  }
+}
+
+.post-type,
+.post-empty {
+  @extend %center-div;
+}
+
+.post-type {
+  @extend %heading-font;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+  word-spacing: 5px;
+  color: rgb(var(--v-theme-searchResultText));
+}
+
+.not-found-container {
+  @extend %center-div;
+}
+
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  & > div {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: rgb(var(--v-theme-searchResultText));
+  }
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .post-type {
+    font-size: 1.556rem;
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  :root {
+    --post-title-size: var(--text-size);
+  }
+
+  .post-type {
+    font-size: 1.444rem;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+}
