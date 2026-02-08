@@ -104,7 +104,7 @@ const props = defineProps<PostDetailProps>();
 watch(
   () => props.content,
   function (newVal: string) {
-    if (isValid(newVal)) {
+    if (import.meta.client && isValid(newVal)) {
       setTimeout(() => {
         Prism.highlightAll();
       }, 300);
@@ -125,12 +125,12 @@ watch(
   border-bottom: 2px dashed #939393;
   margin-top: 30px;
   margin-bottom: 40px;
-  padding-bottom: 20px;
+  padding-bottom: var(--default-padding);
 }
 
 .post-title {
   @extend %post-title;
-  margin-bottom: 20px;
+  margin-bottom: var(--default-padding);
 }
 
 .post-reference {
@@ -142,7 +142,7 @@ watch(
   }
 
   .ref-ul {
-    padding-left: 20px;
+    padding-left: var(--default-padding);
 
     & > li {
       padding-left: 5px;

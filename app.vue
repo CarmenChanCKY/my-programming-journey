@@ -16,9 +16,11 @@ useHead({
 const nuxtApp = useNuxtApp();
 const colorMode = useColorMode();
 const theme = useTheme();
-
+const store = usePersistentStore();
 // initialize theme
-theme.change(colorMode.preference);
+const currentTheme = store.isDarkTheme ? "dark" : "light";
+colorMode.preference = currentTheme;
+theme.change(currentTheme);
 
 nuxtApp.hook("page:finish", () => {
   window.scrollTo(0, 0);

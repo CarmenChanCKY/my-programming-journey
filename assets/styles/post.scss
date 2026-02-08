@@ -2,6 +2,15 @@
   line-height: 2;
   letter-spacing: 0.1px;
 
+  p:empty {
+    height: 1em;
+  }
+
+  ol,
+  ul {
+    margin-left: var(--default-padding);
+  }
+
   pre > code {
     display: inline-block;
     padding-left: 0 !important;
@@ -20,6 +29,7 @@
     color: rgb(var(--v-theme-inlineCodeText)) !important;
     border-radius: 3px;
     font-family: var(--source-code-pro);
+    font-size: 0.889rem;
   }
 
   .post-table {
@@ -40,8 +50,8 @@
 
     & th,
     & td {
-      padding-left: 20px;
-      padding-right: 20px;
+      padding-left: var(--default-padding);
+      padding-right: var(--default-padding);
     }
 
     & th {

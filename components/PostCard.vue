@@ -65,14 +65,14 @@ const props = defineProps<PostPageProps>();
   }
 
   &:last-child {
-    margin-bottom: 20px;
+    margin-bottom: var(--default-padding);
   }
 }
 
 .post-card-title {
   @extend %post-title;
   width: fit-content;
-  margin-bottom: 20px;
+  margin-bottom: var(--default-padding);
 
   &:hover {
     cursor: pointer;
@@ -81,7 +81,7 @@ const props = defineProps<PostPageProps>();
 
 .post-preview {
   line-height: 2;
-  margin-top: 20px;
+  margin-top: var(--default-padding);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   line-clamp: 3;

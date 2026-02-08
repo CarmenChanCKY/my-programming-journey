@@ -72,7 +72,7 @@ function scrollTo(el: string) {
   flex-wrap: wrap;
 
   & > a {
-    margin-right: 20px;
+    margin-right: var(--default-padding);
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;

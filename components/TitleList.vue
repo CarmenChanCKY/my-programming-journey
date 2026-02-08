@@ -54,12 +54,12 @@ const props = withDefaults(defineProps<PostPageProps>(), {
   & > .date {
     font-family: var(--source-code-pro);
     font-size: 0.833rem;
-    padding-left: 20px;
+    padding-left: var(--default-padding);
     color: rgb(var(--v-theme-searchResultText));
   }
 
   & > a {
-    padding-left: 20px;
+    padding-left: var(--default-padding);
   }
 }
 

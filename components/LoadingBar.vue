@@ -1,5 +1,11 @@
 <template>
-  <div class="loading-container">
+  <div
+    :class="{
+      'loading-container': true,
+      'dark-mode': isDarkTheme,
+      'light-mode': !isDarkTheme,
+    }"
+  >
     <div class="spinner-container">
       <v-progress-circular
         :indeterminate="true"
@@ -11,6 +17,13 @@
 </template>
 
 <script lang="ts" setup>
+import { usePersistentStore } from "~/stores/app";
+
+const store = usePersistentStore();
+
+const isDarkTheme = computed(() => {
+  return store.isDarkTheme;
+});
 </script>
 
 <style lang="scss" scoped>
@@ -31,23 +44,21 @@
   height: inherit;
 }
 
-html.dark-mode {
-  .loading-container {
+.loading-container {
+  &.dark-mode {
     background-color: #232023;
+
+    .v-progress-circular {
+      color: #6cbfe8;
+    }
   }
 
-  .v-progress-circular {
-    color: #6cbfe8;
-  }
-}
-
-html.light-mode {
-  .loading-container {
+  &.light-mode {
     background-color: #f2f3f4;
-  }
 
-  .v-progress-circular {
-    color: #007095;
+    .v-progress-circular {
+      color: #007095;
+    }
   }
 }
 </style>

@@ -133,7 +133,7 @@ header {
       @extend %main-title-font;
       @extend %disable-select;
       font-size: 2.667rem;
-      margin-bottom: 20px;
+      margin-bottom: var(--default-padding);
       font-weight: bold;
       color: rgb(var(--v-theme-colorText));
       text-align: center;
@@ -200,7 +200,7 @@ header {
       height: 100%;
       top: 0;
       right: 0;
-      padding: 35px 20px 15px 20px;
+      padding: 35px var(--default-padding) 15px var(--default-padding);
       transform: translateX(350px);
       width: 350px;
 

@@ -1,24 +1,22 @@
 import { usePersistentStore } from "~/stores/app";
 
 export default defineNuxtPlugin({
-  dependsOn: ["vuetify:nuxt:client:plugin"],
   setup(nuxtApp) {
     const colorMode = useColorMode();
     const store = usePersistentStore();
+    const cookie = useCookie("isDarkTheme");
 
-    // set color theme if the colorMode preference is "system"
-    if (colorMode.preference === "system") {
-      let browserDarkTheme = false;
-
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        browserDarkTheme = true;
-      }
-
-      colorMode.preference = browserDarkTheme ? "dark" : "light";
-      store.setTheme(browserDarkTheme);
+    let browserDarkTheme = false;
+    if (
+      cookie.value !== undefined &&
+      cookie.value !== null &&
+      typeof cookie.value === "boolean"
+    ) {
+      browserDarkTheme = cookie.value ? true : false;
+    } else {
+      browserDarkTheme = colorMode.value === "dark" ? true : false;
     }
+
+    store.setTheme(browserDarkTheme);
   },
 });
