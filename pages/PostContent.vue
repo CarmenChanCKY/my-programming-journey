@@ -19,6 +19,10 @@ const route = useRoute();
 let metaKeyword = "";
 let metaDescription = "";
 const content = ref("");
+const previousPost = ref<OtherPostInterface | null>(null);
+const nextPost = ref<OtherPostInterface | null>(null);
+const previousPostError = ref<any>(null);
+const nextPostError = ref<any>(null);
 
 // get post data
 let slug: string = "";
@@ -36,25 +40,23 @@ const {
   method: "GET",
   params: { slug },
   onResponse({ request, response, options }) {
-    metaKeyword = response._data.meta_keyword;
-    metaDescription = isValid(response._data.meta_description)
-      ? response._data.meta_description
-      : "";
+    const raw = response._data as any;
+    metaKeyword = raw.meta_keyword;
+    metaDescription = isValid(raw.meta_description) ? raw.meta_description : "";
 
-    content.value = response._data.content;
+    content.value = raw.content;
 
     response._data = {
-      id: response._data.id,
-      slug: response._data.slug,
-      title: response._data.title,
-      date: response._data.date,
-      category: response._data.category_name,
-      category_id: response._data.category_id,
-      tags: response._data.tags_data,
+      id: raw.id,
+      slug: raw.slug,
+      title: raw.title,
+      date: raw.date,
+      category: raw.category_name,
+      category_id: raw.category_id,
+      tags: raw.tags_data,
       reference:
-        response._data.reference_array !== undefined &&
-        Array.isArray(response._data.reference_array)
-          ? response._data.reference_array
+        raw.reference_array !== undefined && Array.isArray(raw.reference_array)
+          ? raw.reference_array
           : [],
     };
   },
@@ -64,34 +66,36 @@ if (status.value === "error" && error.value != null) {
   throw createError(errorFormatter(error.value));
 }
 
-// get previous post
-const {
-  data: previousPost,
-  status: previousPostStatus,
-  error: previousPostError,
-} = await useAPI<OtherPostInterface>("/post/previous", {
-  method: "GET",
-  params: { id: postData.value?.id },
-  onResponse({ request, response, options }) {},
-});
+// get previous & next post after postData is available
+watch(
+  () => postData.value?.id,
+  async (id) => {
+    if (!id) return;
 
-if (previousPostStatus.value === "error" && previousPostError.value != null) {
-  throw createError(errorFormatter(previousPostError.value));
-}
+    const { data: prev, error: prevErr } = await useAPI<OtherPostInterface>(
+      "/post/previous",
+      { method: "GET", params: { id } },
+    );
+    previousPost.value = prev.value;
+    previousPostError.value = prevErr.value;
 
-// get next post
-const {
-  data: nextPost,
-  status: nextPostStatus,
-  error: nextPostError,
-} = await useAPI<OtherPostInterface>("/post/next", {
-  method: "GET",
-  params: { id: postData.value?.id },
-});
+    if (prevErr.value != null) {
+      throw createError(errorFormatter(prevErr.value));
+    }
 
-if (nextPostStatus.value === "error" && nextPostError.value != null) {
-  throw createError(errorFormatter(nextPostError.value));
-}
+    const { data: nxt, error: nxtErr } = await useAPI<OtherPostInterface>(
+      "/post/next",
+      { method: "GET", params: { id } },
+    );
+    nextPost.value = nxt.value;
+    nextPostError.value = nxtErr.value;
+
+    if (nxtErr.value != null) {
+      throw createError(errorFormatter(nxtErr.value));
+    }
+  },
+  { immediate: true },
+);
 
 if (import.meta.client) {
   const meta = [

@@ -27,23 +27,17 @@ const {
   {
     params: { pages: route.params.pages },
     onResponse({ request, response, options }) {
-      // format post data
-      if (
-        response._data.data !== undefined &&
-        response._data.data != null &&
-        Array.isArray(response._data.data)
-      ) {
-        response._data.data = response._data.data.map((obj: any) => {
-          return {
-            title: obj.title,
-            date: obj.date,
-            slug: obj.slug,
-            category: obj.category_name,
-            category_id: obj.category_id,
-            tags: obj.tags_data,
-            preview: obj.content,
-          } as PostPageInterface;
-        });
+      const raw = response._data as any;
+      if (raw?.data != null && Array.isArray(raw.data)) {
+        raw.data = raw.data.map((obj: any) => ({
+          title: obj.title,
+          date: obj.date,
+          slug: obj.slug,
+          category: obj.category_name,
+          category_id: obj.category_id,
+          tags: obj.tags_data,
+          preview: obj.content,
+        } as PostPageInterface));
       }
     },
   }

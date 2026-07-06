@@ -33,12 +33,15 @@ const {
 } = await useAPI<Array<TitleListInterface>>("/post/archive", {
   method: "GET",
   onResponse({ request, response, options }) {
-    response._data = response._data.data.map((obj: any) => {
-      return {
-        listTitle: obj.post_year_month,
-        list: obj.post_list,
-      };
-    });
+    const raw = response._data as any;
+    if (!raw || Array.isArray(raw)) {
+      response._data = [];
+      return;
+    }
+    response._data = raw.data.map((obj: any) => ({
+      listTitle: obj.post_year_month,
+      list: obj.post_list,
+    }));
   },
 });
 

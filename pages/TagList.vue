@@ -43,7 +43,8 @@ const {
 } = await useAPI<Array<Tags>>("/tag/all", {
   method: "GET",
   onResponse({ request, response, options }) {
-    response._data = response._data.data;
+    const raw = response._data as any;
+    response._data = raw.data ?? [];
   },
 });
 

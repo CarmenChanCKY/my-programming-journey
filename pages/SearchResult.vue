@@ -96,8 +96,9 @@ const {
   method: "GET",
   params,
   onResponse({ request, response, options }) {
+    const raw = response._data as any;
     const formatData: Array<PostPageInterface> = [];
-    const responseData = response._data.data;
+    const responseData = raw?.data;
     if (
       responseData !== undefined &&
       responseData !== null &&
@@ -119,7 +120,7 @@ const {
       }
     }
 
-    response._data.data = formatData;
+    raw.data = formatData;
   },
 });
 
