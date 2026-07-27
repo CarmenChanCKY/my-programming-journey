@@ -2,6 +2,8 @@
 
 A programming blog developed by Nuxt 3, Vue 3 and Typescript
 
+Link: https://myprogrammingjourney.ckying.com
+
 CMS: https://github.com/CarmenChanCKY/my-programming-journey-cms
 
 Backend: https://github.com/CarmenChanCKY/my-programming-journey-backend
