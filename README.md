@@ -2,6 +2,9 @@
 
 A programming blog developed by Nuxt 3, Vue 3 and Typescript
 
+CMS: https://github.com/CarmenChanCKY/my-programming-journey-cms
+Backend: https://github.com/CarmenChanCKY/my-programming-journey-backend
+
 ## Tech Stack
 
 - [Nuxt 3](https://nuxt.com/) - Vue Framework
