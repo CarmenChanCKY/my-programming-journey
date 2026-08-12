@@ -19,7 +19,7 @@
     "prismjs": "^1.30.0",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",
-    "vuetify-nuxt-module": "^0.18.7"
+    "vuetify-nuxt-module": "^1.0.0-rc.4"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
