@@ -20,7 +20,7 @@ Backend: https://github.com/CarmenChanCKY/my-programming-journey-backend
 
 ## Requirements
 
-- Node.js v20.11.1 or later
+- Node.js v22.16.0 or later
 - npm/yarn/pnpm package manager
 
 ## Setup
