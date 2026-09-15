@@ -82,6 +82,11 @@
       </NuxtLink>
     </div>
   </section>
+
+  <ImageDialog
+    v-model:open-dialog="openImgDialog"
+    :img="dialogImg"
+  ></ImageDialog>
 </template>
 
 <script setup lang="ts">
@@ -101,17 +106,63 @@ interface PostDetailProps {
 // props
 const props = defineProps<PostDetailProps>();
 
+const imgElementList = ref<Element[]>([]);
+const openImgDialog = ref<boolean>(false);
+const dialogImg = ref<string>("");
+
 watch(
   () => props.content,
   function (newVal: string) {
     if (import.meta.client && isValid(newVal)) {
       setTimeout(() => {
         Prism.highlightAll();
+
+        initFullSizeImgListener();
       }, 300);
     }
   },
   { immediate: true }
 );
+
+function initFullSizeImgListener() {
+  const eleList: NodeListOf<Element> = document.querySelectorAll(".post-img");
+  const saveEle: Element[] = [];
+
+  for (let i = 0; i < eleList.length; i++) {
+    eleList[i].addEventListener("click", openFullSizeImage);
+    saveEle.push(eleList[i]);
+  }
+
+  imgElementList.value = saveEle;
+}
+
+function openFullSizeImage(this: Element, ev: Event) {
+  ev.preventDefault();
+  ev.stopPropagation();
+  dialogImg.value = "";
+
+  if (ev.target instanceof Element) {
+    const src = ev.target.getAttribute("src");
+    if (isValid(src)) {
+      dialogImg.value = src || "";
+      openImgDialog.value = true;
+    }
+  }
+}
+
+function removeFullSizeImgListener() {
+  if (imgElementList.value.length > 0) {
+    for (let i = 0; i < imgElementList.value.length; i++) {
+      imgElementList.value[i].removeEventListener("click", openFullSizeImage);
+    }
+
+    imgElementList.value = [];
+  }
+}
+
+onBeforeUnmount(() => {
+  removeFullSizeImgListener();
+});
 </script>
 
 <style lang="scss" scoped>

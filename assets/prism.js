@@ -18,6 +18,7 @@ import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-json";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-kotlin";
+import "prismjs/components/prism-lua";
 import "prismjs/components/prism-markdown";
 import "prismjs/components/prism-markup";
 import "prismjs/components/prism-markup-templating";
@@ -31,5 +32,6 @@ import "prismjs/components/prism-scss";
 import "prismjs/components/prism-sql";
 import "prismjs/components/prism-swift";
 import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-yaml";
 
 export default Prism;
